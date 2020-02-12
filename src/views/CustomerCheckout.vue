@@ -87,7 +87,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
       vm.isLoading = true;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.order = response.data.order;
         vm.isLoading = false;
       });
@@ -96,9 +96,9 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
       vm.isLoading = true;
-      this.$http.post(url).then((response) => {
+      vm.$http.post(url).then((response) => {
         if (response.data.success) {
-          this.getOrder();
+          vm.getOrder();
           vm.$bus.$emit('cartCreate:push');
         }
         vm.isLoading = false;
@@ -108,16 +108,17 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       vm.isLoading = true;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.cart = response.data.data;
         vm.isLoading = false;
       });
     },
   },
   created() {
-    this.orderId = this.$route.params.orderId;
-    this.getOrder();
-    this.getCart();
+    const vm = this;
+    vm.orderId = vm.$route.params.orderId;
+    vm.getOrder();
+    vm.getCart();
   },
 };
 </script>

@@ -34,19 +34,19 @@
           <div class="double-border p-3 p-sm-4">
             <span
               class="badge float-right badge-danger category-badge"
-              v-if="product.category == '熱銷商品'"
+              v-if="product.category === '熱銷商品'"
             >{{ product.category }}</span>
             <span
               class="badge float-right badge-moderate category-badge"
-              v-if="product.category == '最新商品'"
+              v-if="product.category === '最新商品'"
             >{{ product.category }}</span>
             <span
               class="badge float-right badge-maple category-badge"
-              v-if="product.category=='楓葉武器' || product.category =='楓葉防具'"
+              v-if="product.category==='楓葉武器' || product.category ==='楓葉防具'"
             >{{ product.category }}</span>
             <span
               class="badge float-right badge-dark category-badge"
-              v-if="product.category == '不速之客'"
+              v-if="product.category === '不速之客'"
             >{{ product.category }}</span>
             <h2 class="h3 product-title pb-4 border-bottom">
               <span class="pb-4">{{ product.title }}</span>
@@ -156,7 +156,7 @@ export default {
     const { id } = vm.$route.params;
     const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
     vm.isLoading = true;
-    this.$http.get(url).then((response) => {
+    vm.$http.get(url).then((response) => {
       vm.product = response.data.product;
       vm.$set(vm.product, 'num', 0);
       vm.isLoading = false;

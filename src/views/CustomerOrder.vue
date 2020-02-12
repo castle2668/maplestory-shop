@@ -232,7 +232,7 @@ export default {
           vm.$bus.$emit('cartCreate:push');
         } else if (response.data.message === '找不到優惠券!') {
           vm.isLoading = false;
-          this.$bus.$emit('message:push', '沒有這張優惠卷', 'danger');
+          vm.$bus.$emit('message:push', '沒有這張優惠卷', 'danger');
         } else if (response.data.message === '優惠券無法無法使用或已過期') {
           vm.isLoading = false;
           vm.$bus.$emit('message:push', '優惠券無法無法使用或已過期', 'danger');

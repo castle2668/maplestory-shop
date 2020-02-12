@@ -13,7 +13,7 @@
             <router-link to="/index" class="text-maple">首頁</router-link>
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            <span v-if="tempCategory==''">所有商品</span>
+            <span v-if="tempCategory===''">所有商品</span>
             <span v-else>{{ tempCategory }}</span>
           </li>
         </ol>
@@ -25,7 +25,7 @@
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
               @click.prevent="tempCategory = ''"
-              :class="{'active': tempCategory == ''}"
+              :class="{'active': tempCategory === ''}"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -40,7 +40,7 @@
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
               @click.prevent="tempCategory = '熱銷商品'"
-              :class="{'active': tempCategory == '熱銷商品'}"
+              :class="{'active': tempCategory === '熱銷商品'}"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -55,7 +55,7 @@
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
               @click.prevent="tempCategory = '最新商品'"
-              :class="{'active': tempCategory == '最新商品'}"
+              :class="{'active': tempCategory === '最新商品'}"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -70,7 +70,7 @@
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
               @click.prevent="tempCategory = '楓葉武器'"
-              :class="{'active': tempCategory == '楓葉武器'}"
+              :class="{'active': tempCategory === '楓葉武器'}"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -85,7 +85,7 @@
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
               @click.prevent="tempCategory = '楓葉防具'"
-              :class="{'active': tempCategory == '楓葉防具'}"
+              :class="{'active': tempCategory === '楓葉防具'}"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -100,7 +100,7 @@
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
               @click.prevent="tempCategory = '不速之客'"
-              :class="{'active': tempCategory == '不速之客'}"
+              :class="{'active': tempCategory === '不速之客'}"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -126,19 +126,19 @@
                 <div class="border-bottom">
                   <span
                     class="badge float-right badge-danger"
-                    v-if="item.category == '熱銷商品'"
+                    v-if="item.category === '熱銷商品'"
                   >{{ item.category }}</span>
                   <span
                     class="badge float-right badge-moderate"
-                    v-if="item.category == '最新商品'"
+                    v-if="item.category === '最新商品'"
                   >{{ item.category }}</span>
                   <span
                     class="badge float-right badge-maple"
-                    v-if="item.category=='楓葉武器' || item.category =='楓葉防具'"
+                    v-if="item.category==='楓葉武器' || item.category ==='楓葉防具'"
                   >{{ item.category }}</span>
                   <span
                     class="badge float-right badge-dark"
-                    v-if="item.category == '不速之客'"
+                    v-if="item.category === '不速之客'"
                   >{{ item.category }}</span>
                   <figure
                     class="mt-4 mb-4 item-image"
@@ -181,7 +181,7 @@
           <Pagination
             v-bind:childPaginations="pagination"
             @changeCurrentPage="getAllProducts"
-            v-if="tempCategory==''"
+            v-if="tempCategory===''"
           ></Pagination>
         </section>
       </div>
@@ -211,7 +211,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
       vm.isLoading = true;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.allProducts = response.data.products;
         vm.pagination = response.data.pagination;
         vm.isLoading = false;
@@ -221,7 +221,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.isLoading = true;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.products = response.data.products;
         vm.isLoading = false;
       });
