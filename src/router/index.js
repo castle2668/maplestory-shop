@@ -1,26 +1,83 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
+const routes = [{
+  path: '*',
+  redirect: '/index',
+},
+{
+  name: 'Dashboard',
+  path: '/admin',
+  component: () => import('@/components/admin/Dashboard.vue'),
+  children: [{
+    name: 'Products',
+    path: 'products',
+    component: () => import('@/views/admin/Products.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    name: 'Coupons',
+    path: 'coupons',
+    component: () => import('@/views/admin/Coupons.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
+  {
+    name: 'Orders',
+    path: 'orders',
+    component: () => import('@/views/admin/Orders.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  ],
+},
+{
+  name: 'Base',
+  path: '/',
+  redirect: '/index',
+  component: () => import('@/components/Base.vue'),
+  children: [{
+    name: 'Index',
+    path: '/index',
+    component: () => import('@/views/Index.vue'),
+  },
+  {
+    name: 'Category',
+    path: 'category',
+    component: () => import('@/views/Category.vue'),
+  },
+  {
+    name: 'Detail',
+    path: 'detail/:id',
+    component: () => import('@/views/Detail.vue'),
+  },
+  {
+    name: 'CustomerOrder',
+    path: 'customerOrder',
+    component: () => import('@/views/CustomerOrder.vue'),
+  },
+  {
+    name: 'CustomerCheckout',
+    path: 'customerCheckout/:orderId',
+    component: () => import('@/views/CustomerCheckout.vue'),
+  },
+  ],
+},
+{
+  name: 'Login',
+  path: '/login',
+  component: () => import('@/views/Login.vue'),
+},
 ];
 
 const router = new VueRouter({
+  linkActiveClass: 'active',
   routes,
 });
 
