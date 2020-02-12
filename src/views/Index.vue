@@ -349,7 +349,7 @@ export default {
     .typing {
       width: 10em;
       white-space: nowrap;
-      border-right: 2px solid transparent; // 文字跟游標隔開 2px
+      border-right: 2px solid transparent;
       animation: typing 3.5s steps(10, end), blink-caret 0.75s step-end infinite;
       overflow: hidden;
       letter-spacing: 0;
