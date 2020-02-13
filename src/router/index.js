@@ -57,17 +57,17 @@ const routes = [{
     path: 'detail/:id',
     component: () => import('@/views/Detail.vue'),
   },
-  {
-    name: 'CustomerOrder',
-    path: 'customerOrder',
-    component: () => import('@/views/CustomerOrder.vue'),
-  },
-  {
-    name: 'CustomerCheckout',
-    path: 'customerCheckout/:orderId',
-    component: () => import('@/views/CustomerCheckout.vue'),
-  },
   ],
+},
+{
+  name: 'CustomerOrder',
+  path: '/customerOrder',
+  component: () => import('@/views/CustomerOrder.vue'),
+},
+{
+  name: 'CustomerCheckout',
+  path: '/customerCheckout/:orderId',
+  component: () => import('@/views/CustomerCheckout.vue'),
 },
 {
   name: 'Login',

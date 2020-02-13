@@ -1,176 +1,215 @@
 <template>
   <div>
-    <loading :active.sync="isLoading">
-      <template slot="default">
-        <div class="loading-image"></div>
-      </template>
-    </loading>
-    <div class="container pt-5 pb-4 cart">
-      <div class="text-center">
-        <h2 class="font-weight-bold mb-4 pb-2">購物車內容</h2>
-      </div>
-      <div class="row d-flex justify-content-center" v-if="cart.carts.length !== 0">
-        <div class="col-lg-10">
-          <table class="table">
-            <thead class="thead-light">
-              <th></th>
-              <th>商品名稱</th>
-              <th>數量</th>
-              <th>單價</th>
-            </thead>
-            <tbody>
-              <tr v-for="item in cart.carts" :key="item.id">
-                <td class="align-middle">
-                  <button
-                    type="button"
-                    class="btn btn-outline-maple btn-sm"
-                    @click="removeCartItem(item.id)"
-                  >
-                    <i class="far fa-trash-alt"></i>
-                  </button>
-                </td>
-                <td class="align-middle">
-                  {{ item.product.title }}
-                  <div class="text-success" v-if="item.coupon">已套用優惠券</div>
-                </td>
-                <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
-                <td
-                  class="align-middle text-right"
-                  :class="{'text-success': item.coupon}"
-                >{{ item.final_total | currency }}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3" class="text-right">總金額</td>
-                <td class="text-right">{{ cart.total | currency }}</td>
-              </tr>
-              <tr v-if="cart.total !== cart.final_total">
-                <td colspan="3" class="text-right text-success">折扣價</td>
-                <td class="text-right text-success">{{ cart.final_total | currency }}</td>
-              </tr>
-            </tfoot>
-          </table>
-          <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code" />
-            <div class="input-group-append">
-              <button class="btn btn-outline-maple" type="button" @click="addCouponCode">
-                套用優惠碼
-              </button>
+    <Header></Header>
+    <Alert></Alert>
+    <main>
+      <loading :active.sync="isLoading">
+        <template slot="default">
+          <div class="loading-image"></div>
+        </template>
+      </loading>
+      <div class="container py-5 cart">
+        <div class="text-center">
+          <h2 class="font-weight-bold mb-4 pb-2">購物車內容</h2>
+        </div>
+        <div class="row d-flex justify-content-center" v-if="cart.carts.length !== 0">
+          <div class="col-lg-10">
+            <table class="table mb-0">
+              <thead class="thead-light">
+                <th></th>
+                <th>商品名稱</th>
+                <th>數量</th>
+                <th>小計</th>
+              </thead>
+              <tbody>
+                <tr v-for="item in cart.carts" :key="item.id">
+                  <td class="align-middle">
+                    <button
+                      type="button"
+                      class="btn btn-outline-maple btn-sm"
+                      @click="removeCartItem(item.id)"
+                    >
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+                  <td class="align-middle">
+                    {{ item.product.title }}
+                    <div class="text-success" v-if="item.coupon">已套用優惠券</div>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-moderate btn-sm d-none d-sm-block"
+                        @click="minusQty(item.id, item.product.id, item.qty)">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                      <select class="select-text-center form-control border-moderate"
+                      id="qtySelect" v-model="item.qty"
+                      @change="updateQty(item.id, item.product.id, item.qty)">
+                        <option selected disabled>{{ item.qty }} / {{ item.product.unit }}</option>
+                        <option :value="number" v-for="number in 10" :key="number">
+                          {{ number }} / {{ item.product.unit }}
+                        </option>
+                      </select>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-moderate btn-sm d-none d-sm-block"
+                        @click="addQty(item.id, item.product.id, item.qty)">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                  <td
+                    class="align-middle text-right"
+                    :class="{'text-success': item.coupon}"
+                  >{{ item.final_total | currency }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-right">總金額</td>
+                  <td class="text-right">{{ cart.total | currency }}</td>
+                </tr>
+                <tr v-if="cart.total !== cart.final_total">
+                  <td colspan="3" class="text-right text-success">折扣價</td>
+                  <td class="text-right text-success">{{ cart.final_total | currency }}</td>
+                </tr>
+              </tfoot>
+            </table>
+            <div class="input-group input-group-sm">
+              <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code" />
+              <div class="input-group-append">
+                <button class="btn btn-outline-maple" type="button" @click="addCouponCode">
+                  套用優惠碼
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div v-else class="row d-flex justify-content-center">
-        <div class="col-lg-10 empty-cart text-center">
-          <p>購物車沒有東西哦！快去逛逛吧！</p>
-          <router-link to="/category" class="text-maple text-decoration-none">進入商城</router-link>
+        <div v-else class="row d-flex justify-content-center">
+          <div class="col-lg-10 empty-cart text-center">
+            <p>購物車沒有東西哦！快去逛逛吧！</p>
+            <router-link to="/category" class="text-maple text-decoration-none">進入商城</router-link>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container cart-form pb-5">
-      <div class="text-center">
-        <h2 class="font-weight-bold mb-4 pb-2">購買資訊</h2>
+      <div class="container cart-form pb-5">
+        <div class="text-center">
+          <h2 class="font-weight-bold mb-4 pb-2">購買資訊</h2>
+        </div>
+        <div class="row justify-content-center">
+          <form class="col-lg-10" @submit.prevent="createOrder">
+            <div class="form-group">
+              <label for="useremail">
+                <i class="fas fa-envelope"></i>
+                Email (*)
+              </label>
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                id="useremail"
+                v-model="form.user.email"
+                placeholder="請輸入 Email"
+                v-validate="'required|email'"
+                :class="{'is-invalid': errors.has('email')}"
+              />
+              <span class="text-danger" v-if="errors.has('email')">
+                {{ errors.first('email') }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label for="username">
+                <i class="fas fa-user"></i>
+                收件人姓名 (*)
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="username"
+                v-model="form.user.name"
+                placeholder="輸入姓名"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('name')}"
+              />
+              <span class="text-danger" v-if="errors.has('name')">必須輸入姓名</span>
+            </div>
+
+            <div class="form-group">
+              <label for="usertel">
+                <i class="fas fa-phone"></i>
+                收件人電話 (*)
+              </label>
+              <input
+                type="tel"
+                class="form-control"
+                id="usertel"
+                v-model="form.user.tel"
+                placeholder="請輸入電話"
+                name="userTel"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('userTel')}"
+              />
+              <span class="text-danger" v-if="errors.has('userTel')">電話欄位不得留空</span>
+            </div>
+
+            <div class="form-group">
+              <label for="useraddress">
+                <i class="fas fa-map-marker-alt"></i>
+                收件人地址 (*)
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                name="address"
+                id="useraddress"
+                v-model="form.user.address"
+                placeholder="請輸入地址"
+                v-validate="'required'"
+                :class="{'is-invalid': errors.has('address')}"
+              />
+              <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
+            </div>
+
+            <div class="form-group">
+              <label for="comment">
+                <i class="fas fa-comment-dots"></i>
+                留言
+              </label>
+              <textarea
+                name
+                id="comment"
+                class="form-control"
+                cols="30"
+                rows="10"
+                v-model="form.message"
+              ></textarea>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-maple btn-lg">送出訂單</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="row justify-content-center">
-        <form class="col-lg-10" @submit.prevent="createOrder">
-          <div class="form-group">
-            <label for="useremail">
-              <i class="fas fa-envelope"></i>
-              Email (*)
-            </label>
-            <input
-              type="email"
-              class="form-control"
-              name="email"
-              id="useremail"
-              v-model="form.user.email"
-              placeholder="請輸入 Email"
-              v-validate="'required|email'"
-              :class="{'is-invalid': errors.has('email')}"
-            />
-            <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
-          </div>
-
-          <div class="form-group">
-            <label for="username">
-              <i class="fas fa-user"></i>
-              收件人姓名 (*)
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              name="name"
-              id="username"
-              v-model="form.user.name"
-              placeholder="輸入姓名"
-              v-validate="'required'"
-              :class="{'is-invalid': errors.has('name')}"
-            />
-            <span class="text-danger" v-if="errors.has('name')">必須輸入姓名</span>
-          </div>
-
-          <div class="form-group">
-            <label for="usertel">
-              <i class="fas fa-phone"></i>
-              收件人電話 (*)
-            </label>
-            <input
-              type="tel"
-              class="form-control"
-              id="usertel"
-              v-model="form.user.tel"
-              placeholder="請輸入電話"
-              name="userTel"
-              v-validate="'required'"
-              :class="{'is-invalid': errors.has('userTel')}"
-            />
-            <span class="text-danger" v-if="errors.has('userTel')">電話欄位不得留空</span>
-          </div>
-
-          <div class="form-group">
-            <label for="useraddress">
-              <i class="fas fa-map-marker-alt"></i>
-              收件人地址 (*)
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              name="address"
-              id="useraddress"
-              v-model="form.user.address"
-              placeholder="請輸入地址"
-              v-validate="'required'"
-              :class="{'is-invalid': errors.has('address')}"
-            />
-            <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
-          </div>
-
-          <div class="form-group">
-            <label for="comment">
-              <i class="fas fa-comment-dots"></i>
-              留言
-            </label>
-            <textarea
-              name
-              id="comment"
-              class="form-control"
-              cols="30"
-              rows="10"
-              v-model="form.message"
-            ></textarea>
-          </div>
-          <div class="text-right">
-            <button class="btn btn-maple btn-lg">送出訂單</button>
-          </div>
-        </form>
-      </div>
-    </div>
+    </main>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
+import Alert from '../components/shared/AlertMessage.vue';
+
 export default {
+  components: {
+    Header,
+    Footer,
+    Alert,
+  },
   data() {
     return {
       products: [],
@@ -257,6 +296,39 @@ export default {
         }
       });
     },
+    addQty(cid, pid, qty) {
+      const newQTY = qty + 1;
+      this.updateQty(cid, pid, newQTY);
+    },
+    minusQty(cid, pid, qty) {
+      const newQTY = qty - 1;
+      this.updateQty(cid, pid, newQTY);
+    },
+    updateQty(cid, pid, qty) {
+      if (qty <= 0) {
+        return;
+      }
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      vm.isLoading = true;
+      const cart = {
+        product_id: pid,
+        qty,
+      };
+      vm.$http.post(url, { data: cart });
+      const url2 = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${cid}`;
+      vm.$http.delete(url2).then((response) => {
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', '產品數量已更新', 'success');
+          vm.getCart();
+          vm.$bus.$emit('cartCreate:push');
+          vm.isLoading = false;
+        } else {
+          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
+          vm.isLoading = false;
+        }
+      });
+    },
   },
   created() {
     const vm = this;
@@ -269,6 +341,10 @@ export default {
 </script>
 
 <style scope lang="scss">
+main {
+  margin-top: 78px;
+}
+
 .loading-image {
   background-image: url(../assets/images/GIFs/KingSlime.gif);
   background-size: cover;
@@ -286,6 +362,15 @@ export default {
     background-color: #ededed;
     border-radius: 10px;
     padding: 30px 0px;
+  }
+  .select-text-center {
+    width: 100px !important;
+    text-align: justify;
+    text-align-last: center;
+    @media(max-width: 575px){
+      border-radius: 5px !important;
+    };
+    flex: none;
   }
 }
 

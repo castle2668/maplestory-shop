@@ -23,12 +23,12 @@
           <div class="modal-body">
             <div class="row d-flex justify-content-center" v-if="cart.carts.length !== 0">
               <div class="col-12">
-                <table class="table">
+                <table class="table mb-0">
                   <thead class="thead-light">
                     <th></th>
                     <th>商品名稱</th>
                     <th>數量</th>
-                    <th>單價</th>
+                    <th>小計</th>
                   </thead>
                   <tbody>
                     <tr v-for="item in cart.carts" :key="item.id">
@@ -48,7 +48,32 @@
                         {{ item.product.title }}
                         <div class="text-success" v-if="item.coupon">已套用優惠券</div>
                       </td>
-                      <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
+                      <td class="align-middle">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <button class="btn btn-outline-moderate btn-sm"
+                            @click="minusQty(item.id, item.product.id, item.qty)">
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                          <select class="select-text-center border-moderate"
+                          id="qtySelect" v-model="item.qty"
+                          @change="updateQty(item.id, item.product.id, item.qty)">
+                            <option selected disabled>
+                              {{ item.qty }} / {{ item.product.unit }}
+                            </option>
+                            <option :value="number" v-for="number in 10" :key="number">
+                              {{ number }} / {{ item.product.unit }}
+                            </option>
+                          </select>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-moderate btn-sm"
+                            @click="addQty(item.id, item.product.id, item.qty)">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </td>
                       <td
                         class="align-middle text-right"
                         :class="{'text-success': item.coupon}"
@@ -148,11 +173,9 @@ export default {
       vm.$http.delete(url).then((response) => {
         if (response.data.success) {
           vm.$bus.$emit('message:push', '產品刪除成功', 'success');
-          vm.isLoading = false;
           vm.getCart();
           vm.$bus.$emit('cartCreate:push');
         } else {
-          vm.isLoading = false;
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         }
       });
@@ -165,16 +188,43 @@ export default {
       };
       vm.$http.post(url, { data: coupon }).then((response) => {
         if (response.data.success) {
-          vm.isLoading = false;
           vm.$bus.$emit('message:push', '優惠碼套用成功', 'success');
           vm.getCart();
           vm.$bus.$emit('cartCreate:push');
         } else if (response.data.message === '找不到優惠券!') {
-          vm.isLoading = false;
           vm.$bus.$emit('message:push', '沒有這張優惠卷', 'danger');
         } else if (response.data.message === '優惠券無法無法使用或已過期') {
-          vm.isLoading = false;
           vm.$bus.$emit('message:push', '優惠券無法無法使用或已過期', 'danger');
+        }
+      });
+    },
+    addQty(cid, pid, qty) {
+      const newQTY = qty + 1;
+      this.updateQty(cid, pid, newQTY);
+    },
+    minusQty(cid, pid, qty) {
+      const newQTY = qty - 1;
+      this.updateQty(cid, pid, newQTY);
+    },
+    updateQty(cid, pid, qty) {
+      if (qty <= 0) {
+        return;
+      }
+      const vm = this;
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const cart = {
+        product_id: pid,
+        qty,
+      };
+      vm.$http.post(url, { data: cart });
+      const url2 = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${cid}`;
+      vm.$http.delete(url2).then((response) => {
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', '產品數量已更新', 'success');
+          vm.getCart();
+          vm.$bus.$emit('cartCreate:push');
+        } else {
+          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         }
       });
     },
@@ -213,5 +263,10 @@ export default {
     color: #fff;
     text-align: center;
   }
+}
+.select-text-center {
+  width: 100px;
+  text-align: justify;
+  text-align-last: center;
 }
 </style>
