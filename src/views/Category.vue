@@ -6,18 +6,7 @@
       </template>
     </loading>
     <div class="banner"></div>
-    <div class="category container pt-3 pb-5">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item">
-            <router-link to="/index" class="text-maple">首頁</router-link>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">
-            <span v-if="tempCategory===''">所有商品</span>
-            <span v-else>{{ tempCategory }}</span>
-          </li>
-        </ol>
-      </nav>
+    <div class="category container py-5">
       <div class="row">
         <section class="col-12 col-lg-3">
           <div class="d-flex d-lg-block flex-wrap justify-content-between sticky-list">
@@ -122,60 +111,63 @@
           <h3 v-else class="py-2 py-lg-0">所有商品</h3>
           <div class="row mt-3">
             <article class="col-md-6 col-lg-4 mb-4" v-for="item in activeProducts" :key="item.id">
-              <div class="card border h-100">
-                <div class="border-bottom">
-                  <span
-                    class="badge float-right badge-danger"
-                    v-if="item.category === '熱銷商品'"
-                  >{{ item.category }}</span>
-                  <span
-                    class="badge float-right badge-moderate"
-                    v-if="item.category === '最新商品'"
-                  >{{ item.category }}</span>
-                  <span
-                    class="badge float-right badge-maple"
-                    v-if="item.category==='楓葉武器' || item.category ==='楓葉防具'"
-                  >{{ item.category }}</span>
-                  <span
-                    class="badge float-right badge-dark"
-                    v-if="item.category === '不速之客'"
-                  >{{ item.category }}</span>
-                  <figure
-                    class="mt-4 mb-4 item-image"
-                    :style="{backgroundImage: `url(${item.imageUrl})`}"
-                  ></figure>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title text-center">
-                    <a href="#" class="text-dark font-weight-bold">{{ item.title }}</a>
-                  </h4>
-                  <p class="card-text text-secondary text-center">{{ item.content }}</p>
-                  <div class="d-flex justify-content-center align-items-end">
-                    <div class="h5" v-if="!item.price">{{ item.origin_price | currency }}</div>
-                    <del
-                      class="h6 text-secondary pr-1"
-                      v-if="item.price"
-                    >{{ item.origin_price | currency }}</del>
-                    <div
-                      class="h5 text-maple font-weight-bold"
-                      v-if="item.price"
-                    >{{ item.price | currency }}</div>
+              <a @click.prevent="goDetail(item.id)" class="text-decoration-none"
+              style="cursor: pointer;">
+                <div class="card border h-100">
+                  <div class="border-bottom">
+                    <span
+                      class="badge float-right badge-danger"
+                      v-if="item.category === '熱銷商品'"
+                    >{{ item.category }}</span>
+                    <span
+                      class="badge float-right badge-moderate"
+                      v-if="item.category === '最新商品'"
+                    >{{ item.category }}</span>
+                    <span
+                      class="badge float-right badge-maple"
+                      v-if="item.category==='楓葉武器' || item.category ==='楓葉防具'"
+                    >{{ item.category }}</span>
+                    <span
+                      class="badge float-right badge-dark"
+                      v-if="item.category === '不速之客'"
+                    >{{ item.category }}</span>
+                    <figure
+                      class="mt-4 mb-4 item-image"
+                      :style="{backgroundImage: `url(${item.imageUrl})`}"
+                    ></figure>
+                  </div>
+                  <div class="card-body">
+                    <h4 class="card-title text-center">
+                      <a href="#" class="text-dark font-weight-bold">{{ item.title }}</a>
+                    </h4>
+                    <p class="card-text text-secondary text-center">{{ item.content }}</p>
+                    <div class="d-flex justify-content-center align-items-end">
+                      <div class="h5" v-if="!item.price">{{ item.origin_price | currency }}</div>
+                      <del
+                        class="h6 text-secondary pr-1"
+                        v-if="item.price"
+                      >{{ item.origin_price | currency }}</del>
+                      <div
+                        class="h5 text-maple font-weight-bold"
+                        v-if="item.price"
+                      >{{ item.price | currency }}</div>
+                    </div>
+                  </div>
+                  <div class="card-footer d-flex bg-white border-0 pt-0 flex-lg-column flex-xl-row">
+                    <router-link
+                      :to="`/detail/${item.id}`"
+                      class="btn btn-outline-secondary btn-xl-sm w-100 mr-2"
+                    >查看更多</router-link>
+                    <button
+                      type="button"
+                      class="btn btn-outline-maple btn-xl-sm ml-auto w-100 mt-lg-2 mt-xl-0"
+                      @click.stop="addToCart(item.id)"
+                    >
+                      加入購物車
+                    </button>
                   </div>
                 </div>
-                <div class="card-footer d-flex bg-white border-0 pt-0 flex-lg-column flex-xl-row">
-                  <router-link
-                    :to="`/detail/${item.id}`"
-                    class="btn btn-outline-secondary btn-xl-sm w-100 mr-2"
-                  >查看更多</router-link>
-                  <button
-                    type="button"
-                    class="btn btn-outline-maple btn-xl-sm ml-auto w-100 mt-lg-2 mt-xl-0"
-                    @click="addToCart(item.id)"
-                  >
-                    加入購物車
-                  </button>
-                </div>
-              </div>
+              </a>
             </article>
           </div>
           <Pagination
@@ -248,6 +240,9 @@ export default {
         }
       });
     },
+    goDetail(id) {
+      this.$router.push(`/detail/${id}`);
+    },
   },
   computed: {
     activeProducts() {
@@ -316,9 +311,8 @@ export default {
   }
   .card {
     transition: all 0.5s;
-    box-shadow: 0 1px 3px #000;
     &:hover {
-      box-shadow: 0 2px 10px #000;
+      box-shadow: 0 1px 3px #000;
     }
     .badge {
       font-size: 14px;
