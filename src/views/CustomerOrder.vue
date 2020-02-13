@@ -342,7 +342,7 @@ export default {
 
 <style scope lang="scss">
 main {
-  margin-top: 78px;
+  margin-top: 76.79px;
 }
 
 .loading-image {
