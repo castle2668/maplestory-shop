@@ -92,7 +92,7 @@ export default {
 
 <style scoped lang="scss">
 .navbar {
-  border-bottom: 4px solid #d3d3d3;
+  border-bottom: 3px solid #d3d3d3;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   .ms-logo {
     @media (max-width: 992px) {
@@ -111,21 +111,11 @@ export default {
   li.nav-item {
     float: left;
     position: relative;
-    &:hover span {
+    &:hover span{
       position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-left: -35%;
-      width: 70%;
-      height: 0px;
-      box-shadow: 0 0 20px 12px rgba(150, 180, 200, 0.6);
-      border-radius: 10px 6px;
-      @media (max-width: 991px) {
-        left: 2%;
-        top: 50%;
-        margin-left: 0;
-        width: 95%;
-      }
+      width: 100%;
+      bottom: 0;
+      border-bottom: 3px solid #c1170c;
     }
     .nav-link {
       display: block;

@@ -62,7 +62,10 @@
         </div>
       </div>
       <div v-else class="row d-flex justify-content-center">
-        <div class="col-lg-10 empty-cart text-center">購物車沒有東西哦！</div>
+        <div class="col-lg-10 empty-cart text-center">
+          <p>購物車沒有東西哦！快去逛逛吧！</p>
+          <router-link to="/category" class="text-maple text-decoration-none">進入商城</router-link>
+        </div>
       </div>
     </div>
     <div class="container cart-form pb-5">

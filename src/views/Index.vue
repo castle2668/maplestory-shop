@@ -79,7 +79,7 @@
       </div>
     </section>
 
-    <section class="comment">
+    <section class="comment pt-5">
       <div class="container text-center">
         <h2 class="font-weight-bolder mb-4 pb-2">看看其他人怎麼說</h2>
         <div class="row">
@@ -121,7 +121,6 @@
       <div class="swiper-container pt-4">
         <div class="swiper-wrapper">
           <swiper :options="swiperOption2" ref="mySwiper">
-            <!-- slides -->
             <swiper-slide>
               <div class="slide">
                 <img src="../assets/images/Job/beginner.jpg" class="img-fluid" alt />
@@ -296,6 +295,7 @@ export default {
           vm.$bus.$emit('message:push', '產品加入購物車成功', 'success');
           vm.$bus.$emit('cartCreate:push');
           vm.isLoading = false;
+          vm.$router.push('/customerOrder');
         } else if (response.data.message === '加入購物車有誤') {
           vm.isLoading = false;
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
@@ -340,12 +340,15 @@ export default {
   }
   h3 {
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.55); // 0.45
+    background-color: rgba(0, 0, 0, 0.55);
     padding: 10px;
     border-radius: 10px;
     width: 300px;
     min-height: 90px;
     max-height: 100%;
+    div{
+      line-height: 1.4;
+    }
     .typing {
       width: 10em;
       white-space: nowrap;

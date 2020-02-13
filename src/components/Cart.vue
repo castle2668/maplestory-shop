@@ -1,7 +1,7 @@
 <template>
   <div>
     <a type='button' class='btn btn-cart' data-toggle='modal' data-target='#cartModal'>
-      <span class="badge-cart">{{ cart.carts.length }}</span>
+      <span class="badge-cart" v-if="cart.carts.length">{{ cart.carts.length }}</span>
       <img src="../assets/images/GIFs/cart.gif" alt />
     </a>
     <div
@@ -81,15 +81,20 @@
               </div>
             </div>
             <div class="text-center text-moderate" v-else>
-              <p class="align-middle">
-                <i class="fas fa-shopping-cart fa-5x"></i>
-              </p>
-              <p class="h3 align-middle mb-0">購物車還沒有任何東西哦！</p>
+              <div class="align-middle pb-3">
+                <img src="../assets/images/penguine.png" height="150px" alt="">
+              </div>
+              <p class="h3 align-middle mb-0" style="line-height: 1.4">購物車空空的哦~<br>去看看心儀的商品吧~</p>
             </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer" v-if="cart.carts.length!==0">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">再逛逛</button>
             <a @click.prevent="goCheckout" class="btn btn-maple text-white">結帳去</a>
+          </div>
+          <div class="modal-footer" v-else>
+            <a @click.prevent="goShopping" class="btn btn-block btn-maple text-white">
+              前往購物商城
+            </a>
           </div>
         </div>
       </div>
@@ -118,6 +123,13 @@ export default {
     goCheckout() {
       $('#cartModal').modal('hide');
       const path = '/customerOrder';
+      if (this.$route.path !== path) {
+        this.$router.push(path);
+      }
+    },
+    goShopping() {
+      $('#cartModal').modal('hide');
+      const path = '/category';
       if (this.$route.path !== path) {
         this.$router.push(path);
       }
