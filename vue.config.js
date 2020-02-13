@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/MapleStoryShopV4/'
+  publicPath: './'
 }
