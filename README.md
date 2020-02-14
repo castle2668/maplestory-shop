@@ -52,15 +52,15 @@
 
 ### 首頁畫面
 
-![首頁畫面](https://i.imgur.com/olBEWyD.png)
+![首頁畫面](https://i.imgur.com/gSkWOfh.png)
 
 ### 商品列表
 
-![商品列表](https://i.imgur.com/nFSgnIq.png)
+![商品列表](https://i.imgur.com/cpR7eHl.png)
 
 ### 購物車
 
-![購物車](https://i.imgur.com/4FxomSk.png)
+![購物車](https://i.imgur.com/bpEhIHG.png)
 
 ### 管理員登入介面
 
