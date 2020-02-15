@@ -11,7 +11,7 @@ import './bus';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import currencyFilter from './filters/currency';
 import dateFilter from './filters/date';
-import 'swiper/dist/css/swiper.css';
+import 'swiper/css/swiper.css';
 import App from './App.vue';
 import router from './router';
 
@@ -38,3 +38,20 @@ new Vue({
   router,
   render: (h) => h(App),
 }).$mount('#app');
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
+    axios.post(api).then((response) => {
+      if (response.data.success) {
+        next();
+      } else {
+        next({
+          path: '/login',
+        });
+      }
+    });
+  } else {
+    next();
+  }
+});
