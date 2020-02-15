@@ -95,6 +95,7 @@ import Footer from '../components/Footer.vue';
 import Alert from '../components/shared/AlertMessage.vue';
 
 export default {
+  name: 'CustomerCheckout',
   components: {
     Header,
     Footer,

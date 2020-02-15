@@ -77,7 +77,7 @@
                 </tr>
               </tfoot>
             </table>
-            <div class="input-group input-group-sm">
+            <div class="input-group input-group">
               <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code" />
               <div class="input-group-append">
                 <button class="btn btn-outline-maple" type="button" @click="addCouponCode">
@@ -205,6 +205,7 @@ import Footer from '../components/Footer.vue';
 import Alert from '../components/shared/AlertMessage.vue';
 
 export default {
+  name: 'CustomerOrder',
   components: {
     Header,
     Footer,
@@ -231,6 +232,7 @@ export default {
         },
         message: '',
       },
+      hasCart: false,
     };
   },
   methods: {
@@ -336,6 +338,14 @@ export default {
     vm.$bus.$on('cartCreate:push', () => {
       vm.getCart();
     });
+  },
+  watched: {
+    hasCart() {
+      const vm = this;
+      if (vm.cart.carts.length !== 0) {
+        vm.hasCart = true;
+      }
+    },
   },
 };
 </script>
