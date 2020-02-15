@@ -55,7 +55,10 @@ export default {
       const vm = this;
       vm.$http.post(api, vm.user).then((response) => {
         if (response.data.success) {
-          vm.$router.push('/admin/products');
+          const path = '/admin/products';
+          if (vm.$route.path !== path) {
+            vm.$router.push(path);
+          }
         }
       });
     },

@@ -61,7 +61,8 @@
               class="h5 mb-3 text-maple sale-price"
               v-if="product.price"
             >特價 NT{{ product.price | currency }}</div>
-            <select name class="form-control my-3" v-model="product.num">
+            <select name class="form-control my-3" v-model="product.num"
+            @change="isDisabled = false">
               <option value="0" selected disabled>請選擇數量</option>
               <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
             </select>
@@ -70,11 +71,8 @@
               <strong>{{ product.num * product.price | currency }}</strong>
               元
             </p>
-            <button
-              type="button"
-              class="btn btn-maple mb-4 w-100"
-              @click="addToCart(product.id, product.num)"
-            >
+            <button type="button" class="btn btn-maple mb-4 w-100" :class="{disabled: isDisabled}"
+            @click="addToCart(product.id, product.num)">
               加到購物車
             </button>
             <h5 class="pt-4 text-maple border-top">【配送及其他說明】</h5>
@@ -125,6 +123,7 @@ export default {
         num: 0,
       },
       isLoading: false,
+      isDisabled: true,
     };
   },
   methods: {

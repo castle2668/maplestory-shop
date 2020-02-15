@@ -241,7 +241,10 @@ export default {
       });
     },
     goDetail(id) {
-      this.$router.push(`/detail/${id}`);
+      const path = `/detail/${id}`;
+      if (this.$route.path !== path) {
+        this.$router.push(path);
+      }
     },
   },
   computed: {
