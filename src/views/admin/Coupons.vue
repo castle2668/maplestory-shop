@@ -189,11 +189,9 @@ export default {
       } else {
         vm.tempCoupon = { ...item };
         vm.isNew = false;
-        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000)
-          .toISOString()
-          .split('T');
-        // eslint-disable-next-line prefer-destructuring
-        vm.due_date = dateAndTime[0];
+        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
+        // vm.due_date = dateAndTime[0];
+        [vm.due_date] = [dateAndTime];
       }
       $('#couponModal').modal('show');
     },
