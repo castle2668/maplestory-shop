@@ -62,7 +62,7 @@
               v-if="product.price"
             >特價 NT{{ product.price | currency }}</div>
             <select name class="form-control my-3" v-model="product.num"
-            @change="EnablingBtn">
+            @change="enablingBtn()">
               <option value="0" selected disabled>請選擇數量</option>
               <option :value="num" v-for="num in 10" :key="num">選購 {{num}} {{product.unit}}</option>
             </select>
@@ -149,7 +149,7 @@ export default {
         }
       });
     },
-    EnablingBtn() {
+    enablingBtn() {
       document.querySelector('.disabledBtn').disabled = false;
     },
   },

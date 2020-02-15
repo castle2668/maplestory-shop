@@ -38,26 +38,22 @@
                   </td>
                   <td class="align-middle">
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <button class="btn btn-outline-moderate btn-sm d-none d-sm-block"
-                        @click="minusQty(item.id, item.product.id, item.qty)">
-                          <i class="fas fa-minus"></i>
-                        </button>
-                      </div>
+                      <button class="btn btn-outline-moderate btn-sm d-none d-sm-block mr-2"
+                      @click="minusQty(item.id, item.product.id, item.qty)">
+                        <i class="fas fa-minus"></i>
+                      </button>
                       <select class="select-text-center form-control border-moderate"
                       id="qtySelect" v-model="item.qty"
                       @change="updateQty(item.id, item.product.id, item.qty)">
-                        <option selected disabled>{{ item.qty }} / {{ item.product.unit }}</option>
+                        <option selected disabled>{{ item.qty }}</option>
                         <option :value="number" v-for="number in 10" :key="number">
-                          {{ number }} / {{ item.product.unit }}
+                          {{ number }}
                         </option>
                       </select>
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-moderate btn-sm d-none d-sm-block"
-                        @click="addQty(item.id, item.product.id, item.qty)">
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </div>
+                      <button class="btn btn-outline-moderate btn-sm d-none d-sm-block ml-2"
+                      @click="addQty(item.id, item.product.id, item.qty)">
+                        <i class="fas fa-plus"></i>
+                      </button>
                     </div>
                   </td>
                   <td
@@ -77,7 +73,7 @@
                 </tr>
               </tfoot>
             </table>
-            <div class="input-group input-group">
+            <div class="input-group input-group-sm">
               <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="coupon_code" />
               <div class="input-group-append">
                 <button class="btn btn-outline-maple" type="button" @click="addCouponCode">
@@ -114,6 +110,7 @@
                 placeholder="請輸入 Email"
                 v-validate="'required|email'"
                 :class="{'is-invalid': errors.has('email')}"
+                :disabled="isDisabled"
               />
               <span class="text-danger" v-if="errors.has('email')">
                 {{ errors.first('email') }}
@@ -134,6 +131,7 @@
                 placeholder="輸入姓名"
                 v-validate="'required'"
                 :class="{'is-invalid': errors.has('name')}"
+                :disabled="isDisabled"
               />
               <span class="text-danger" v-if="errors.has('name')">必須輸入姓名</span>
             </div>
@@ -152,6 +150,7 @@
                 name="userTel"
                 v-validate="'required'"
                 :class="{'is-invalid': errors.has('userTel')}"
+                :disabled="isDisabled"
               />
               <span class="text-danger" v-if="errors.has('userTel')">電話欄位不得留空</span>
             </div>
@@ -170,6 +169,7 @@
                 placeholder="請輸入地址"
                 v-validate="'required'"
                 :class="{'is-invalid': errors.has('address')}"
+                :disabled="isDisabled"
               />
               <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
             </div>
@@ -186,10 +186,11 @@
                 cols="30"
                 rows="10"
                 v-model="form.message"
+                :disabled="isDisabled"
               ></textarea>
             </div>
             <div class="text-right">
-              <button class="btn btn-maple btn-lg">送出訂單</button>
+              <button class="btn btn-maple btn-lg" :disabled="isDisabled">送出訂單</button>
             </div>
           </form>
         </div>
@@ -232,7 +233,7 @@ export default {
         },
         message: '',
       },
-      hasCart: false,
+      isDisabled: true,
     };
   },
   methods: {
@@ -339,11 +340,13 @@ export default {
       vm.getCart();
     });
   },
-  watched: {
-    hasCart() {
+  watch: {
+    cart() {
       const vm = this;
       if (vm.cart.carts.length !== 0) {
-        vm.hasCart = true;
+        vm.isDisabled = false;
+      } else {
+        vm.isDisabled = true;
       }
     },
   },
@@ -377,9 +380,7 @@ main {
     width: 100px !important;
     text-align: justify;
     text-align-last: center;
-    @media(max-width: 575px){
-      border-radius: 5px !important;
-    };
+    border-radius: 0.2rem !important;
     flex: none;
   }
 }

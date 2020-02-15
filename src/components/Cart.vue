@@ -50,28 +50,22 @@
                       </td>
                       <td class="align-middle">
                         <div class="input-group">
-                          <div class="input-group-prepend">
-                            <button class="btn btn-outline-moderate btn-sm"
-                            @click="minusQty(item.id, item.product.id, item.qty)">
-                              <i class="fas fa-minus"></i>
-                            </button>
-                          </div>
-                          <select class="select-text-center border-moderate"
+                          <button class="btn btn-outline-moderate btn-sm d-none d-sm-block mr-2"
+                          @click="minusQty(item.id, item.product.id, item.qty)">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                          <select class="select-text-center form-control border-moderate"
                           id="qtySelect" v-model="item.qty"
                           @change="updateQty(item.id, item.product.id, item.qty)">
-                            <option selected disabled>
-                              {{ item.qty }} / {{ item.product.unit }}
-                            </option>
+                            <option selected disabled>{{ item.qty }}</option>
                             <option :value="number" v-for="number in 10" :key="number">
-                              {{ number }} / {{ item.product.unit }}
+                              {{ number }}
                             </option>
                           </select>
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-moderate btn-sm"
-                            @click="addQty(item.id, item.product.id, item.qty)">
-                              <i class="fas fa-plus"></i>
-                            </button>
-                          </div>
+                          <button class="btn btn-outline-moderate btn-sm d-none d-sm-block ml-2"
+                          @click="addQty(item.id, item.product.id, item.qty)">
+                            <i class="fas fa-plus"></i>
+                          </button>
                         </div>
                       </td>
                       <td
@@ -265,8 +259,10 @@ export default {
   }
 }
 .select-text-center {
-  width: 100px;
+  width: 100px !important;
   text-align: justify;
   text-align-last: center;
+  border-radius: 0.2rem !important;
+  flex: none;
 }
 </style>
