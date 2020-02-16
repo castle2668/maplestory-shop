@@ -5,38 +5,41 @@
         <div class="loading-image"></div>
       </template>
     </loading>
-    <table class="table mt-4" v-if="orders.length">
-      <thead class="thead-light">
-        <tr>
-          <th>購買時間</th>
-          <th>Email</th>
-          <th>購買款項</th>
-          <th>應付金額</th>
-          <th>是否付款</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in sortOrder" :key="item.id" :class="{'text-secondary': !item.is_paid}">
-          <td class="align-middle">{{ item.create_at | date }}</td>
-          <td class="align-middle">
-            <span v-text="item.user.email" v-if="item.user"></span>
-          </td>
-          <td class="align-middle">
-            <ul class="list-unstyled mt-auto mb-auto">
-              <li v-for="(product, i) in item.products" :key="i">
-                {{ product.product.title }} 數量：{{ product.qty }}
-                {{ product.product.unit }}
-              </li>
-            </ul>
-          </td>
-          <td class="align-middle text-right">{{ item.total | currency }}</td>
-          <td class="align-middle">
-            <span v-if="item.is_paid" class="text-success">已付款</span>
-            <span v-else class="text-danger">尚未啟用</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive-sm mb-3">
+      <table class="table mt-4" v-if="orders.length">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-nowrap">購買時間</th>
+            <th class="text-nowrap">Email</th>
+            <th class="text-nowrap">購買款項</th>
+            <th class="text-nowrap">應付金額</th>
+            <th class="text-nowrap">是否付款</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in sortOrder" :key="item.id" :class="{'text-secondary': !item.is_paid}">
+            <td class="align-middle">{{ item.create_at | date }}</td>
+            <td class="align-middle">
+              <span v-text="item.user.email" v-if="item.user"></span>
+            </td>
+            <td class="align-middle">
+              <ul class="list-unstyled mt-auto mb-auto">
+                <li v-for="(product, i) in item.products" :key="i">
+                  <p class="text-nowrap m-0 p-0">
+                    {{ product.product.title }} 數量：{{ product.qty }} {{ product.product.unit }}
+                  </p>
+                </li>
+              </ul>
+            </td>
+            <td class="align-middle text-right">{{ item.total | currency }}</td>
+            <td class="align-middle">
+              <span v-if="item.is_paid" class="text-success">已付款</span>
+              <span v-else class="text-danger">尚未啟用</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <Pagination v-bind:childPaginations="pagination" @changeCurrentPage="getOrders"></Pagination>
   </div>
 </template>

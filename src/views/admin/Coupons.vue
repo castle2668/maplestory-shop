@@ -5,38 +5,41 @@
         <div class="loading-image"></div>
       </template>
     </loading>
-    <div class="text-sm-right">
+    <div class="text-right">
       <button class="btn btn-maple" @click="openModal(true)">建立新優惠券</button>
     </div>
-    <table class="table border-bottom my-4">
-      <thead class="thead-light">
-        <tr>
-          <th>名稱</th>
-          <th>折扣百分比</th>
-          <th>到期日</th>
-          <th>是否啟用</th>
-          <th>編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in coupons" :key="item.id">
-          <td>{{ item.title }}</td>
-          <td>{{ item.percent }}%</td>
-          <td>{{ item.due_date | date}}</td>
-          <td>
-            <span v-if="item.is_enabled" class="text-success">啟用</span>
-            <span v-else class="text-danger">未啟用</span>
-          </td>
-          <td>
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button class="btn btn-sm btn-outline-moderate"
-              @click="openModal(false, item)">編輯</button>
-              <button class="btn btn-sm btn-outline-maple" @click="openDelModal(item)">刪除</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive-md mb-3">
+      <table class="table border-bottom my-4">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-nowrap">名稱</th>
+            <th class="text-nowrap">折扣百分比</th>
+            <th class="text-nowrap">到期日</th>
+            <th class="text-nowrap">是否啟用</th>
+            <th class="text-nowrap">編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in coupons" :key="item.id">
+            <td class="align-middle text-nowrap">{{ item.title }}</td>
+            <td class="align-middle">{{ item.percent }}%</td>
+            <td class="align-middle">{{ item.due_date | date}}</td>
+            <td class="align-middle">
+              <span v-if="item.is_enabled" class="text-success">啟用</span>
+              <span v-else class="text-danger">未啟用</span>
+            </td>
+            <td class="align-middle">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-sm btn-outline-moderate text-nowrap"
+                @click="openModal(false, item)">編輯</button>
+                <button class="btn btn-sm btn-outline-maple text-nowrap"
+                @click="openDelModal(item)">刪除</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <Pagination v-bind:childPaginations="pagination" @changeCurrentPage="getCoupons"></Pagination>
     <div
       class="modal fade"

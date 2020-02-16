@@ -5,40 +5,43 @@
         <div class="loading-image"></div>
       </template>
     </loading>
-    <div class="text-sm-right">
+    <div class="text-right">
       <button class="btn btn-maple" @click="openModal(true)">建立新產品</button>
     </div>
-    <table class="table my-4 border-bottom">
-      <thead class="thead-light">
-        <tr>
-          <th>分類</th>
-          <th>品名</th>
-          <th>原價</th>
-          <th>售價</th>
-          <th>狀態</th>
-          <th>編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item) in products" :key="item.id">
-          <td class="align-middle">{{ item.category }}</td>
-          <td class="align-middle">{{ item.title }}</td>
-          <td class="align-middle text-right">{{ item.origin_price | currency}}</td>
-          <td class="align-middle text-right">{{ item.price | currency}}</td>
-          <td class="align-middle">
-            <span v-if="item.is_enabled" class="text-success">啟用</span>
-            <span v-else class="text-maple">未啟用</span>
-          </td>
-          <td class="align-middle">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button class="btn btn-sm btn-outline-moderate"
-              @click="openModal(false, item)">編輯</button>
-              <button class="btn btn-sm btn-outline-maple" @click="openDelModal(item)">刪除</button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive-sm mb-3">
+      <table class="table my-4 border-bottom">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-nowrap">分類</th>
+            <th class="text-nowrap">品名</th>
+            <th class="text-nowrap">原價</th>
+            <th class="text-nowrap">售價</th>
+            <th class="text-nowrap">狀態</th>
+            <th class="text-nowrap">編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item) in products" :key="item.id">
+            <td class="align-middle">{{ item.category }}</td>
+            <td class="align-middle">{{ item.title }}</td>
+            <td class="align-middle text-right">{{ item.origin_price | currency}}</td>
+            <td class="align-middle text-right">{{ item.price | currency}}</td>
+            <td class="align-middle">
+              <span v-if="item.is_enabled" class="text-success">啟用</span>
+              <span v-else class="text-maple">未啟用</span>
+            </td>
+            <td class="align-middle">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-sm btn-outline-moderate text-nowrap"
+                @click="openModal(false, item)">編輯</button>
+                <button class="btn btn-sm btn-outline-maple text-nowrap"
+                @click="openDelModal(item)">刪除</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <Pagination v-bind:childPaginations="pagination" @changeCurrentPage="getProducts"></Pagination>
     <div
       class="modal fade"

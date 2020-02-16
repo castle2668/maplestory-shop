@@ -5,12 +5,13 @@
     <main>
       <router-view></router-view>
     </main>
-    <Cart class="d-none d-sm-block"></Cart>
+    <Cart></Cart>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
+import $ from 'jquery';
 import Header from './Header.vue';
 import Footer from './Footer.vue';
 import Cart from './Cart.vue';
@@ -23,11 +24,18 @@ export default {
     Cart,
     Alert,
   },
+  created() {
+    $(window).click(() => {
+      if ($('.navbar-collapse').hasClass('show')) {
+        $('.navbar-toggler').click();
+      }
+    });
+  },
 };
 </script>
 
 <style scoped lang="scss">
 main {
-  margin-top: 76.79px;
+  margin-top: 69px;
 }
 </style>

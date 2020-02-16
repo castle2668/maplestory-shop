@@ -8,10 +8,13 @@
           <div class="loading-image"></div>
         </template>
       </loading>
-      <div class='container conform-cart py-5'>
-        <div class='text-center'>
-          <h2 class="font-weight-bold mb-4 pb-2" v-if="!order.is_paid">確認訂單</h2>
-          <h2 class="font-weight-bold mb-4 pb-2" v-else>付款完成，感謝購買！</h2>
+      <div class="container conform-cart py-5">
+        <div class="text-center" v-if="!order.is_paid">
+          <h2 class="font-weight-bold mb-4 pb-2" >確認訂單</h2>
+        </div>
+        <div class="text-center" v-else>
+          <h2 class="font-weight-bold mb-3 pb-2">付款完成</h2>
+          <p class="patronage mb-3">感謝您的購買，我們將會盡快出貨！</p>
         </div>
         <div class="row justify-content-center">
           <div class="col-lg-10">
@@ -19,9 +22,9 @@
             <form class="mb-3" @submit.prevent="payOrder">
               <table class="table border-bottom mb-5" v-if="!order.is_paid">
                 <thead class="thead-light">
-                  <th>商品名稱</th>
-                  <th>數量</th>
-                  <th>單價</th>
+                  <th class="text-nowrap">商品名稱</th>
+                  <th class="text-nowrap">數量</th>
+                  <th class="text-nowrap">單價</th>
                 </thead>
                 <tbody>
                   <tr v-for="item in order.products" :key="item.id">
@@ -144,7 +147,7 @@ export default {
 
 <style scoped lang='scss'>
 main {
-  margin-top: 76.79px;
+  margin-top: 69px;
 }
 
 .conform-cart {
@@ -152,6 +155,14 @@ main {
     display: inline-block;
     font-weight: 600;
     border-bottom: 3px solid #c1170c;
+  }
+  p.patronage{
+    @media(min-width: 321px){
+      font-size: 1.2rem;
+    }
+    @media(min-width: 576px){
+      font-size: 1.5rem;
+    }
   }
 }
 

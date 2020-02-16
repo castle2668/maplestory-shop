@@ -2,7 +2,7 @@
   <div>
     <header class="fixed-top">
       <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container">
+        <div class="container-fluid container-lg">
           <button
             class="navbar-toggler"
             type="button"
@@ -16,7 +16,7 @@
           </button>
           <div class="ms-logo">
             <h1 class="m-0">
-              <router-link to="/index" class="navbar-brand ml-auto">MapleStory</router-link>
+              <router-link to="/index" class="navbar-brand ml-auto m-0 p-0">MapleStory</router-link>
             </h1>
           </div>
           <div class="collapse navbar-collapse" id="navbarNav">
@@ -25,7 +25,7 @@
                 <span></span>
                 <router-link
                   to="/admin/products"
-                  class="nav-link p-3"
+                  class="nav-link p-3 py-md-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
@@ -37,7 +37,7 @@
                 <span></span>
                 <router-link
                   to="/admin/orders"
-                  class="nav-link p-3"
+                  class="nav-link p-3 py-md-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
@@ -49,7 +49,7 @@
                 <span></span>
                 <router-link
                   to="/admin/coupons"
-                  class="nav-link p-3"
+                  class="nav-link p-3 py-md-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
@@ -59,7 +59,10 @@
               </li>
               <li class="nav-item">
                 <span></span>
-                <a class="nav-link p-3" href="#" @click.prevent="signout">登出</a>
+                <a class="nav-link p-3 py-md-2" href="#" @click.prevent="signout">
+                  <i class="fas fa-sign-out-alt"></i>
+                  登出
+                </a>
               </li>
             </ul>
           </div>
@@ -96,8 +99,11 @@ export default {
     }
     .navbar-brand {
       background-image: url(../../assets/images/MapleStory.svg);
-      width: 150px;
-      height: 57.79px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: left top;
+      width: 129.802699896px;
+      height: 50px;
       display: block;
       text-indent: 101%;
       overflow: hidden;
@@ -112,13 +118,16 @@ export default {
       width: 100%;
       bottom: 0;
       border-bottom: 3px solid #c1170c;
+      bottom: -5px;
+      @media(max-width: 767px){
+        bottom: 0px;
+      }
     }
     .nav-link {
       display: block;
       background: transparent;
       font-weight: bold;
       text-decoration: none;
-      padding: 20px;
       position: relative;
       &.active,
       &:hover {

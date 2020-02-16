@@ -60,12 +60,13 @@ export default {
 };
 </script>
 
-<style scope>
+<style scope lang="scss">
 .message-alert {
   position: fixed;
-  max-width: 50%;
-  top: 56px;
-  right: 20px;
+  width: 250px;
+  top: 69px;
+  left: 50%;
+  margin-left: -125px;
   z-index: 1100;
 }
 </style>

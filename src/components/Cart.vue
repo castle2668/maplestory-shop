@@ -4,15 +4,9 @@
       <span class="badge-cart" v-if="cart.carts.length">{{ cart.carts.length }}</span>
       <img src="../assets/images/GIFs/cart.gif" alt />
     </a>
-    <div
-      class="modal fade"
-      id="cartModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="cartModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" id="cartModal" tabindex="-1"
+    role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="cartModalLabel">購物車</h5>
@@ -23,12 +17,13 @@
           <div class="modal-body">
             <div class="row d-flex justify-content-center" v-if="cart.carts.length !== 0">
               <div class="col-12">
+                <div class="table-responsive mb-2">
                 <table class="table mb-0">
                   <thead class="thead-light">
                     <th></th>
-                    <th>商品名稱</th>
-                    <th>數量</th>
-                    <th>小計</th>
+                    <th class="text-nowrap">商品名稱</th>
+                    <th class="text-nowrap">數量</th>
+                    <th class="text-nowrap">小計</th>
                   </thead>
                   <tbody>
                     <tr v-for="item in cart.carts" :key="item.id">
@@ -37,10 +32,7 @@
                           type="button"
                           class="btn btn-outline-maple btn-sm"
                           @click="removeCartItem(item.id)"
-                          style="width:32px; height:30px; overflow:hidden"
                         >
-                          <i class="fas fa-spinner fa-spin"
-                          v-if="status.loadingItem === item.id"></i>
                           <i class="far fa-trash-alt"></i>
                         </button>
                       </td>
@@ -48,7 +40,7 @@
                         {{ item.product.title }}
                         <div class="text-success" v-if="item.coupon">已套用優惠券</div>
                       </td>
-                      <td class="align-middle">
+                      <td class="align-middle responsive-td">
                         <div class="input-group">
                           <button class="btn btn-outline-moderate btn-sm d-none d-sm-block mr-2"
                           @click="minusQty(item.id, item.product.id, item.qty)">
@@ -85,7 +77,8 @@
                     </tr>
                   </tfoot>
                 </table>
-                <div class="input-group input-group-sm">
+                </div>
+                <div class="input-group input-group">
                   <input
                     type="text"
                     class="form-control"
@@ -103,7 +96,7 @@
               <div class="align-middle pb-3">
                 <img src="../assets/images/penguine.png" height="150px" alt="">
               </div>
-              <p class="h3 align-middle mb-0" style="line-height: 1.4">購物車空空的哦~<br>去看看心儀的商品吧~</p>
+              <p class="h3 align-middle mb-0" style="line-height: 1.4">購物車空空的哦！<br>去看看心儀的商品吧</p>
             </div>
           </div>
           <div class="modal-footer" v-if="cart.carts.length!==0">
@@ -241,7 +234,7 @@ export default {
   right: 20px;
   z-index: 1100;
 }
-.btn-cart {
+a.btn-cart {
   position: fixed;
   bottom: 20px;
   right: 10px;
@@ -258,11 +251,18 @@ export default {
     text-align: center;
   }
 }
-.select-text-center {
-  width: 100px !important;
-  text-align: justify;
-  text-align-last: center;
-  border-radius: 0.2rem !important;
-  flex: none;
+table.table{
+  .responsive-td{
+    @media(min-width: 576px){
+      width: 200px;
+    }
+    .select-text-center {
+      width: 80px;
+      text-align: justify;
+      text-align-last: center;
+      border-radius: 0.2rem;
+      flex: none;
+    }
+  }
 }
 </style>
