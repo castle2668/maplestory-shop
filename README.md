@@ -19,11 +19,13 @@
 13. [2020/02/10]：為 GitHub 的 Repository 新增 README、部署 GitHub Pages
 14. [2020/02/12]：專案升級至 Vue CLI 4，並加入 ESLint (Airbnb)
 15. [2020/02/13]：前台畫面修改與調整
+16. [2020/02/15]：修正套件未正確載入的問題、產品詳細頁畫面修改
+17. [2020/02/16]：購物車與行動版畫面修改
 
 ## :pencil2: Skills | 使用技術
 
 - Vue CLI 4
-- VueRouter
+- Vue Router
 - JavaScript (ES6)
 - ESLint (Airbnb)
 - API
@@ -35,12 +37,17 @@
 
 ## :pushpin: Plugins | 使用插件
 
+- [vue-router](https://router.vuejs.org/zh/)
 - [vue-awesome-swiper](https://3.swiper.com.cn/)
 - [vue-loading-overlay](https://www.npmjs.com/package/vue-loading-overlay)
+- [vue-i18n](https://github.com/kazupon/vue-i18n#readme)
 - [vee-validate](https://logaretm.github.io/vee-validate/)
+- [swiper](https://swiperjs.com/)
+- [popper.js](https://popper.js.org/)
+- [less-loader](https://github.com/webpack-contrib/less-loader)
+- [css-loader](https://github.com/webpack-contrib/css-loader)
+- [bootstrap](https://getbootstrap.com/)
 - [vue-axios](https://www.npmjs.com/package/vue-axios)
-- [Popper.js](https://popper.js.org/)
-- [vue-router](https://router.vuejs.org/zh/)
 
 ## :mag: Introduction | 前端畫面介紹
 
