@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import Vuex from 'vuex';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -14,9 +15,11 @@ import dateFilter from './filters/date';
 import 'swiper/css/swiper.css';
 import App from './App.vue';
 import router from './router';
+import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
+Vue.use(Vuex);
 Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'zhTW',
@@ -36,6 +39,7 @@ axios.defaults.withCredentials = true;
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount('#app');
 

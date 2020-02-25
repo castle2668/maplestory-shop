@@ -1,10 +1,10 @@
 <template>
   <div class="py-4">
-    <loading :active.sync="isLoading">
+    <!-- <loading :active.sync="isLoading">
       <template slot="default">
         <div class="loading-image"></div>
       </template>
-    </loading>
+    </loading> -->
     <div class="table-responsive-sm mb-3">
       <table class="table mt-4" v-if="orders.length">
         <thead class="thead-light">
@@ -52,7 +52,7 @@ export default {
     return {
       orders: [],
       pagination: {},
-      isLoading: false,
+      // isLoading: false,
     };
   },
   components: {
@@ -62,9 +62,11 @@ export default {
     getOrders(currentPage = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${currentPage}`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
+        // vm.isLoading = false;
+        vm.$store.state.isLoading = false;
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
       });

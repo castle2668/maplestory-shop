@@ -3,11 +3,11 @@
     <Header></Header>
     <Alert></Alert>
     <main>
-      <loading :active.sync="isLoading">
+      <!-- <loading :active.sync="isLoading">
         <template slot="default">
           <div class="loading-image"></div>
         </template>
-      </loading>
+      </loading> -->
       <div class="container py-5 cart">
         <div class="text-center">
           <h2 class="font-weight-bold mb-4 pb-2">購物車內容</h2>
@@ -223,7 +223,7 @@ export default {
       status: {
         loadingItem: '',
       },
-      isLoading: false,
+      // isLoading: false,
       cart: {
         carts: [],
       },
@@ -244,24 +244,29 @@ export default {
     getCart() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.get(url).then((response) => {
         vm.cart = response.data.data;
-        vm.isLoading = false;
+        // vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       });
     },
     removeCartItem(id) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.delete(url).then((response) => {
         if (response.data.success) {
           vm.$bus.$emit('message:push', '產品刪除成功', 'success');
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.getCart();
           vm.$bus.$emit('cartCreate:push');
         } else {
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         }
       });
@@ -269,21 +274,25 @@ export default {
     addCouponCode() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       const coupon = {
         code: vm.coupon_code,
       };
       vm.$http.post(url, { data: coupon }).then((response) => {
         if (response.data.success) {
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.$bus.$emit('message:push', '優惠碼套用成功', 'success');
           vm.getCart();
           vm.$bus.$emit('cartCreate:push');
         } else if (response.data.message === '找不到優惠券!') {
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.$bus.$emit('message:push', '沒有這張優惠卷', 'danger');
         } else if (response.data.message === '優惠券無法無法使用或已過期') {
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.$bus.$emit('message:push', '優惠券無法無法使用或已過期', 'danger');
         }
       });
@@ -298,7 +307,8 @@ export default {
             if (response.data.success) {
               vm.$router.push(`/customerCheckout/${response.data.orderId}`);
             }
-            vm.isLoading = false;
+            // vm.isLoading = false;
+            vm.$store.state.isLoading = false;
           });
         }
       });
@@ -317,7 +327,8 @@ export default {
       }
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       const cart = {
         product_id: pid,
         qty,
@@ -329,10 +340,12 @@ export default {
           vm.$bus.$emit('message:push', '產品數量已更新', 'success');
           vm.getCart();
           vm.$bus.$emit('cartCreate:push');
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
         } else {
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
         }
       });
     },

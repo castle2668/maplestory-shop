@@ -1,10 +1,10 @@
 <template>
   <div class="py-5">
-    <loading :active.sync="isLoading">
+    <!-- <loading :active.sync="isLoading">
       <template slot="default">
         <div class="loading-image"></div>
       </template>
-    </loading>
+    </loading> -->
     <div class="text-right">
       <button class="btn btn-maple" @click="openModal(true)">建立新優惠券</button>
     </div>
@@ -157,7 +157,7 @@ export default {
       coupons: [],
       tempCoupon: {},
       isNew: false,
-      isLoading: false,
+      // isLoading: false,
       pagination: {},
       due_date: new Date(),
     };
@@ -176,9 +176,11 @@ export default {
     getCoupons(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
+        // vm.isLoading = false;
+        vm.$store.state.isLoading = false;
         vm.coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
       });

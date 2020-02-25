@@ -1,10 +1,10 @@
 <template>
   <div>
-    <loading :active.sync="isLoading">
+    <!-- <loading :active.sync="isLoading">
       <template slot="default">
         <div class="loading-image"></div>
       </template>
-    </loading>
+    </loading> -->
     <div class="banner"></div>
     <div class="category container py-5">
       <div class="row">
@@ -192,7 +192,7 @@ export default {
     return {
       products: [],
       product: {},
-      isLoading: false,
+      // isLoading: false,
       tempCategory: '',
       pagination: {},
       allProducts: [],
@@ -202,26 +202,31 @@ export default {
     getAllProducts(page = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.get(url).then((response) => {
         vm.allProducts = response.data.products;
         vm.pagination = response.data.pagination;
-        vm.isLoading = false;
+        // vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       });
     },
     getProducts() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       vm.$http.get(url).then((response) => {
         vm.products = response.data.products;
-        vm.isLoading = false;
+        // vm.isLoading = false;
+        vm.$store.state.isLoading = false;
       });
     },
     addToCart(id, qty = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.isLoading = true;
+      // vm.isLoading = true;
+      vm.$store.state.isLoading = true;
       const cart = {
         product_id: id,
         qty,
@@ -230,12 +235,15 @@ export default {
         if (response.data.message === '已加入購物車') {
           vm.$bus.$emit('message:push', '產品加入購物車成功', 'success');
           vm.$bus.$emit('cartCreate:push');
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
         } else if (response.data.message === '加入購物車有誤') {
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         } else {
-          vm.isLoading = false;
+          // vm.isLoading = false;
+          vm.$store.state.isLoading = false;
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         }
       });
