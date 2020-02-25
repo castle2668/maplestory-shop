@@ -1,10 +1,5 @@
 <template>
   <div>
-    <!-- <loading :active.sync="isLoading">
-      <template slot="default">
-        <div class="loading-image"></div>
-      </template>
-    </loading> -->
     <div class="container py-3">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
@@ -123,15 +118,13 @@ export default {
       product: {
         num: 0,
       },
-      // isLoading: false,
     };
   },
   methods: {
     addToCart(id, qty = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      // vm.isLoading = true;
-      vm.$store.state.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       const cart = {
         product_id: id,
         qty,
@@ -140,15 +133,12 @@ export default {
         if (response.data.message === '已加入購物車') {
           vm.$bus.$emit('message:push', '產品加入購物車成功', 'success');
           vm.$bus.$emit('cartCreate:push');
-          // vm.isLoading = false;
-          vm.$store.state.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
         } else if (response.data.message === '加入購物車有誤') {
-          // vm.isLoading = false;
-          vm.$store.state.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         } else {
-          // vm.isLoading = false;
-          vm.$store.state.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         }
       });
@@ -161,13 +151,11 @@ export default {
     const vm = this;
     const { id } = vm.$route.params;
     const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-    // vm.isLoading = true;
-    vm.$store.state.isLoading = true;
+    vm.$store.dispatch('updateLoading', true);
     vm.$http.get(url).then((response) => {
       vm.product = response.data.product;
       vm.$set(vm.product, 'num', 0);
-      // vm.isLoading = false;
-      vm.$store.state.isLoading = false;
+      vm.$store.dispatch('updateLoading', false);
     });
   },
 };

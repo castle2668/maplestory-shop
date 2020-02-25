@@ -1,10 +1,5 @@
 <template>
   <div class="py-5">
-    <!-- <loading :active.sync="isLoading">
-      <template slot="default">
-        <div class="loading-image"></div>
-      </template>
-    </loading> -->
     <div class="text-right">
       <button class="btn btn-maple" @click="openModal(true)">建立新優惠券</button>
     </div>
@@ -157,7 +152,6 @@ export default {
       coupons: [],
       tempCoupon: {},
       isNew: false,
-      // isLoading: false,
       pagination: {},
       due_date: new Date(),
     };
@@ -176,11 +170,9 @@ export default {
     getCoupons(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      // vm.isLoading = true;
-      vm.$store.state.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       vm.$http.get(api).then((response) => {
-        // vm.isLoading = false;
-        vm.$store.state.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
         vm.coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
       });
@@ -195,7 +187,6 @@ export default {
         vm.tempCoupon = { ...item };
         vm.isNew = false;
         const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
-        // vm.due_date = dateAndTime[0];
         [vm.due_date] = [dateAndTime];
       }
       $('#couponModal').modal('show');

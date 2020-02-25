@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- <loading :active.sync="isLoading">
-      <template slot="default">
-        <div class="loading-image"></div>
-      </template>
-    </loading> -->
-
     <div class="banner d-flex justify-content-center align-items-center">
       <h3 class="text-center">
         <div>回到最初的感動…</div>
@@ -269,26 +263,22 @@ export default {
         },
       },
       products: [],
-      // isLoading: false,
     };
   },
   methods: {
     getProducts() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      // vm.isLoading = true;
-      vm.$store.state.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       vm.$http.get(url).then((response) => {
         vm.products = response.data.products;
-        // vm.isLoading = false;
-        vm.$store.state.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     addToCart(id, qty = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      // vm.isLoading = true;
-      vm.$store.state.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       const cart = {
         product_id: id,
         qty,
@@ -297,16 +287,13 @@ export default {
         if (response.data.message === '已加入購物車') {
           vm.$bus.$emit('message:push', '產品加入購物車成功', 'success');
           vm.$bus.$emit('cartCreate:push');
-          // vm.isLoading = false;
-          vm.$store.state.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
           vm.$router.push('/customerOrder');
         } else if (response.data.message === '加入購物車有誤') {
-          // vm.isLoading = false;
-          vm.$store.state.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         } else {
-          // vm.isLoading = false;
-          vm.$store.state.isLoading = false;
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
         }
       });

@@ -3,11 +3,6 @@
     <Header></Header>
     <Alert></Alert>
     <main>
-      <!-- <loading :active.sync="isLoading">
-        <template slot="default">
-          <div class="loading-image"></div>
-        </template>
-      </loading> -->
       <div class="container conform-cart py-5">
         <div class="text-center" v-if="!order.is_paid">
           <h2 class="font-weight-bold mb-4 pb-2" >確認訂單</h2>
@@ -111,33 +106,28 @@ export default {
         user: {},
       },
       step: 1,
-      // isLoading: false,
     };
   },
   methods: {
     getOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      // vm.isLoading = true;
-      vm.$store.state.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       vm.$http.get(url).then((response) => {
         vm.order = response.data.order;
-        // vm.isLoading = false;
-        vm.$store.state.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     payOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      // vm.isLoading = true;
-      vm.$store.state.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       vm.$http.post(url).then((response) => {
         if (response.data.success) {
           vm.getOrder();
           vm.$bus.$emit('cartCreate:push');
         }
-        // vm.isLoading = false;
-        vm.$store.state.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
   },
