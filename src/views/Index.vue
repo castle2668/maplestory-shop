@@ -61,7 +61,7 @@
                     <button
                       type="button"
                       class="btn btn-outline-maple btn-xl-sm ml-auto w-100 mt-md-2 mt-xl-0"
-                      @click="addToCart(item.id)"
+                      @click="buyNow(item.id)"
                     >立即購買</button>
                   </div>
                 </div>
@@ -262,50 +262,25 @@ export default {
           prevEl: '.swiper-button-prev.swp2',
         },
       },
-      products: [],
     };
   },
   methods: {
     getProducts() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      vm.$store.dispatch('updateLoading', true);
-      vm.$http.get(url).then((response) => {
-        vm.products = response.data.products;
-        vm.$store.dispatch('updateLoading', false);
-      });
+      this.$store.dispatch('getProducts');
     },
-    addToCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$store.dispatch('updateLoading', true);
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      vm.$http.post(url, { data: cart }).then((response) => {
-        if (response.data.message === '已加入購物車') {
-          vm.$bus.$emit('message:push', '產品加入購物車成功', 'success');
-          vm.$bus.$emit('cartCreate:push');
-          vm.$store.dispatch('updateLoading', false);
-          vm.$router.push('/customerOrder');
-        } else if (response.data.message === '加入購物車有誤') {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-        } else {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-        }
-      });
+    buyNow(id, qty = 1) {
+      this.$store.dispatch('buyNow', { id, qty });
     },
   },
   computed: {
+    products() {
+      return this.$store.state.products;
+    },
     swiper() {
       return this.$refs.mySwiper.swiper;
     },
     hotProducts() {
-      const vm = this;
-      return vm.products.filter((item) => item.category === '熱銷商品');
+      return this.$store.state.products.filter((item) => item.category === '熱銷商品');
     },
   },
   created() {

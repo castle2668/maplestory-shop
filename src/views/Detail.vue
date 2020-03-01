@@ -114,7 +114,6 @@
 export default {
   data() {
     return {
-      id: '',
       product: {
         num: 0,
       },
@@ -122,26 +121,7 @@ export default {
   },
   methods: {
     addToCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$store.dispatch('updateLoading', true);
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      vm.$http.post(url, { data: cart }).then((response) => {
-        if (response.data.message === '已加入購物車') {
-          vm.$bus.$emit('message:push', '產品加入購物車成功', 'success');
-          vm.$bus.$emit('cartCreate:push');
-          vm.$store.dispatch('updateLoading', false);
-        } else if (response.data.message === '加入購物車有誤') {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-        } else {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-        }
-      });
+      this.$store.dispatch('addToCart', { id, qty });
     },
     enablingBtn() {
       document.querySelector('.disabledBtn').disabled = false;

@@ -39,8 +39,8 @@
                           <i class="fas fa-minus"></i>
                         </button>
                         <select class="select-text-center form-control border-moderate"
-                        id="qtySelect" v-model="item.qty"
-                        @change="updateQty(item.id, item.product.id, item.qty)">
+                        id="qtySelect"
+                        @change="updateQtyBySelect(item.id, item.product.id, $event)">
                           <option selected disabled>{{ item.qty }}</option>
                           <option :value="number" v-for="number in 10" :key="number">
                             {{ number }}
@@ -213,14 +213,6 @@ export default {
   },
   data() {
     return {
-      products: [],
-      product: {},
-      status: {
-        loadingItem: '',
-      },
-      cart: {
-        carts: [],
-      },
       coupon_code: '',
       form: {
         user: {
@@ -236,51 +228,13 @@ export default {
   },
   methods: {
     getCart() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$store.dispatch('updateLoading', true);
-      vm.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        vm.$store.dispatch('updateLoading', false);
-      });
+      this.$store.dispatch('getCart');
     },
     removeCartItem(id) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      vm.$store.dispatch('updateLoading', true);
-      vm.$http.delete(url).then((response) => {
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', '產品刪除成功', 'success');
-          vm.$store.dispatch('updateLoading', false);
-          vm.getCart();
-          vm.$bus.$emit('cartCreate:push');
-        } else {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-        }
-      });
+      this.$store.dispatch('removeCart', id);
     },
     addCouponCode() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-      vm.$store.dispatch('updateLoading', true);
-      const coupon = {
-        code: vm.coupon_code,
-      };
-      vm.$http.post(url, { data: coupon }).then((response) => {
-        if (response.data.success) {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', '優惠碼套用成功', 'success');
-          vm.getCart();
-          vm.$bus.$emit('cartCreate:push');
-        } else if (response.data.message === '找不到優惠券!') {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', '沒有這張優惠卷', 'danger');
-        } else if (response.data.message === '優惠券無法無法使用或已過期') {
-          vm.$store.dispatch('updateLoading', false);
-          vm.$bus.$emit('message:push', '優惠券無法無法使用或已過期', 'danger');
-        }
-      });
+      this.$store.dispatch('addCouponCode', this.coupon_code);
     },
     createOrder() {
       const vm = this;
@@ -298,45 +252,25 @@ export default {
       });
     },
     addQty(cid, pid, qty) {
-      const newQTY = qty + 1;
-      this.updateQty(cid, pid, newQTY);
+      const newQty = Number(qty) + 1;
+      this.$store.dispatch('updateQty', { cid, pid, newQty });
     },
     minusQty(cid, pid, qty) {
-      const newQTY = qty - 1;
-      this.updateQty(cid, pid, newQTY);
+      const newQty = Number(qty) - 1;
+      this.$store.dispatch('updateQty', { cid, pid, newQty });
     },
-    updateQty(cid, pid, qty) {
-      if (qty <= 0) {
-        return;
-      }
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$store.dispatch('updateLoading', true);
-      const cart = {
-        product_id: pid,
-        qty,
-      };
-      vm.$http.post(url, { data: cart });
-      const url2 = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${cid}`;
-      vm.$http.delete(url2).then((response) => {
-        if (response.data.success) {
-          vm.$bus.$emit('message:push', '產品數量已更新', 'success');
-          vm.getCart();
-          vm.$bus.$emit('cartCreate:push');
-          vm.$store.dispatch('updateLoading', false);
-        } else {
-          vm.$bus.$emit('message:push', 'Oops！出現錯誤了！', 'danger');
-          vm.$store.dispatch('updateLoading', false);
-        }
-      });
+    updateQtyBySelect(cid, pid, $event) {
+      const newQty = Number($event.target.value);
+      this.$store.dispatch('updateQtyBySelect', { cid, pid, newQty });
     },
   },
   created() {
-    const vm = this;
-    vm.getCart();
-    vm.$bus.$on('cartCreate:push', () => {
-      vm.getCart();
-    });
+    this.getCart();
+  },
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
   },
   watch: {
     cart() {
