@@ -198,8 +198,6 @@ export default new Vuex.Store({
     },
     CART(state, payload) {
       state.cart = payload;
-      // state.cart = { ...payload };
-      // state.cart = JSON.parse(JSON.stringify(payload));
     },
     // Alert
     MESSAGES(state, { message, status, timestamp }) {
@@ -218,6 +216,20 @@ export default new Vuex.Store({
     },
     REMOVEMESSAGE(state, num) {
       state.messages.splice(num, 1);
+    },
+  },
+  getters: {
+    products(state) {
+      return state.products;
+    },
+    cart(state) {
+      return state.cart;
+    },
+    allProducts(state) {
+      return state.allProducts;
+    },
+    pagination(state) {
+      return state.pagination;
     },
   },
 });

@@ -177,6 +177,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Pagination from '../components/shared/Pagination.vue';
 
 export default {
@@ -189,9 +190,6 @@ export default {
     };
   },
   methods: {
-    getProducts() {
-      this.$store.dispatch('getProducts');
-    },
     getAllProducts(page = 1) {
       this.$store.dispatch('getAllProducts', page);
     },
@@ -204,17 +202,9 @@ export default {
         this.$router.push(path);
       }
     },
+    ...mapActions(['getProducts']),
   },
   computed: {
-    products() {
-      return this.$store.state.products;
-    },
-    allProducts() {
-      return this.$store.state.allProducts;
-    },
-    pagination() {
-      return this.$store.state.pagination;
-    },
     activeProducts() {
       const vm = this;
       if (vm.tempCategory === '') {
@@ -222,6 +212,7 @@ export default {
       }
       return vm.$store.state.products.filter((item) => item.category === vm.tempCategory);
     },
+    ...mapGetters(['products', 'allProducts', 'pagination']),
   },
   created() {
     this.getAllProducts();

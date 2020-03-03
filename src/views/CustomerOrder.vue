@@ -200,6 +200,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Alert from '../components/shared/AlertMessage.vue';
@@ -227,9 +228,6 @@ export default {
     };
   },
   methods: {
-    getCart() {
-      this.$store.dispatch('getCart');
-    },
     removeCartItem(id) {
       this.$store.dispatch('removeCart', id);
     },
@@ -263,14 +261,13 @@ export default {
       const newQty = Number($event.target.value);
       this.$store.dispatch('updateQtyBySelect', { cid, pid, newQty });
     },
+    ...mapActions(['getCart']),
+  },
+  computed: {
+    ...mapGetters(['cart']),
   },
   created() {
     this.getCart();
-  },
-  computed: {
-    cart() {
-      return this.$store.state.cart;
-    },
   },
   watch: {
     cart() {

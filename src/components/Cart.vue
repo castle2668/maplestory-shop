@@ -115,6 +115,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import $ from 'jquery';
 
 export default {
@@ -139,9 +140,6 @@ export default {
         this.$router.push(path);
       }
     },
-    getCart() {
-      this.$store.dispatch('getCart');
-    },
     removeCart(id) {
       this.$store.dispatch('removeCart', id);
     },
@@ -160,14 +158,13 @@ export default {
       const newQty = Number($event.target.value);
       this.$store.dispatch('updateQtyBySelect', { cid, pid, newQty });
     },
+    ...mapActions(['getCart']),
   },
   created() {
     this.getCart();
   },
   computed: {
-    cart() {
-      return this.$store.state.cart;
-    },
+    ...mapGetters(['cart']),
   },
 };
 </script>

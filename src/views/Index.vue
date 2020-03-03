@@ -181,6 +181,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import { swiper, swiperSlide } from 'vue-awesome-swiper';
 
 export default {
@@ -265,23 +266,19 @@ export default {
     };
   },
   methods: {
-    getProducts() {
-      this.$store.dispatch('getProducts');
-    },
     buyNow(id, qty = 1) {
       this.$store.dispatch('buyNow', { id, qty });
     },
+    ...mapActions(['getProducts']),
   },
   computed: {
-    products() {
-      return this.$store.state.products;
-    },
     swiper() {
       return this.$refs.mySwiper.swiper;
     },
     hotProducts() {
       return this.$store.state.products.filter((item) => item.category === '熱銷商品');
     },
+    ...mapGetters(['products']),
   },
   created() {
     this.getProducts();
