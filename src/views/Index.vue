@@ -269,16 +269,16 @@ export default {
     buyNow(id, qty = 1) {
       this.$store.dispatch('buyNow', { id, qty });
     },
-    ...mapActions(['getProducts']),
+    ...mapActions('productsModules', ['getProducts']),
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
     },
     hotProducts() {
-      return this.$store.state.products.filter((item) => item.category === '熱銷商品');
+      return this.$store.state.productsModules.products.filter((item) => item.category === '熱銷商品');
     },
-    ...mapGetters(['products']),
+    ...mapGetters('productsModules', ['products']),
   },
   created() {
     this.getProducts();

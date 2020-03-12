@@ -1,6 +1,6 @@
 # MapleStoryShop (楓之谷商城)
 
-> 歡迎來到楓之谷商城，這是一份 Vue.js 電商網站的前端練習作品 (Vue CLI 4)
+> 歡迎來到楓之谷商城，這是一份 Vue.js 電商網站的前端練習作品 (Vue CLI 4 + Vuex)
 
 ## :pencil: Change Log | 更新日誌
 
@@ -21,9 +21,11 @@
 15. [2020/02/13]：前台畫面修改與調整
 16. [2020/02/15]：修正套件未正確載入的問題、產品詳細頁畫面修改
 17. [2020/02/16]：購物車與行動版畫面修改
+18. [2020/03/12]：更新至 Vue CLI 4 + Vuex 版本
 
 ## :pencil2: Skills | 使用技術
 
+- Vuex
 - Vue CLI 4
 - Vue Router
 - JavaScript (ES6)
@@ -109,7 +111,7 @@
 - 網站名稱：MapleStoryShop
 - 網站描述：楓之谷電子商務網站
 - 網站網址：<https://sealman234.github.io/MapleStoryShopV4/>
-- 網站狀態：Vue CLI 4 版製作完成，Vue CLI 4 + Vuex 版正在更新中 ...
+- 網站狀態：Vue CLI 4 + Vuex 版更新完成
 
 ## :hamburger: About Author | 關於作者
 

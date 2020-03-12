@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 import router from '@/router';
+import productsModules from './products';
 
 Vue.use(Vuex);
 
@@ -9,9 +10,6 @@ export default new Vuex.Store({
   strict: true,
   state: {
     isLoading: false,
-    products: [],
-    pagination: {},
-    allProducts: [],
     cart: {
       carts: [],
     },
@@ -20,23 +18,6 @@ export default new Vuex.Store({
   actions: {
     updateLoading(context, status) {
       context.commit('LOADING', status);
-    },
-    getProducts(context) {
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      context.commit('LOADING', true);
-      axios.get(url).then((response) => {
-        context.commit('PRODUCTS', response.data.products);
-        context.commit('LOADING', false);
-      });
-    },
-    getAllProducts(context, page) {
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-      context.commit('LOADING', true);
-      axios.get(url).then((response) => {
-        context.commit('ALLPRODUCTS', response.data.products);
-        context.commit('PAGINATION', response.data.pagination);
-        context.commit('LOADING', false);
-      });
     },
     getCart(context) {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
@@ -187,15 +168,6 @@ export default new Vuex.Store({
     LOADING(state, status) {
       state.isLoading = status;
     },
-    PRODUCTS(state, payload) {
-      state.products = payload;
-    },
-    PAGINATION(state, payload) {
-      state.pagination = payload;
-    },
-    ALLPRODUCTS(state, payload) {
-      state.allProducts = payload;
-    },
     CART(state, payload) {
       state.cart = payload;
     },
@@ -219,17 +191,11 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    products(state) {
-      return state.products;
-    },
     cart(state) {
       return state.cart;
     },
-    allProducts(state) {
-      return state.allProducts;
-    },
-    pagination(state) {
-      return state.pagination;
-    },
+  },
+  modules: {
+    productsModules,
   },
 });

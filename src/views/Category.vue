@@ -191,7 +191,7 @@ export default {
   },
   methods: {
     getAllProducts(page = 1) {
-      this.$store.dispatch('getAllProducts', page);
+      this.$store.dispatch('productsModules/getAllProducts', page);
     },
     addToCart(id, qty = 1) {
       this.$store.dispatch('addToCart', { id, qty });
@@ -202,17 +202,20 @@ export default {
         this.$router.push(path);
       }
     },
-    ...mapActions(['getProducts']),
+    ...mapActions('productsModules', ['getProducts']),
   },
   computed: {
     activeProducts() {
       const vm = this;
       if (vm.tempCategory === '') {
-        return vm.$store.state.allProducts;
+        return vm.$store.state.productsModules.allProducts;
       }
-      return vm.$store.state.products.filter((item) => item.category === vm.tempCategory);
+      return vm.$store.state.productsModules.products.filter(
+        (item) => item.category === vm.tempCategory,
+      );
     },
-    ...mapGetters(['products', 'allProducts', 'pagination']),
+    ...mapGetters('productsModules', ['products', 'allProducts', 'pagination']),
+    // ...mapGetters(['allProducts', 'pagination']),
   },
   created() {
     this.getAllProducts();
