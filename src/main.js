@@ -10,9 +10,10 @@ import zhTW from 'vee-validate/dist/locale/zh_TW';
 import VueI18n from 'vue-i18n';
 import './bus';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
+import swiper, { Navigation, Pagination, Autoplay } from 'swiper';
+import 'swiper/swiper-bundle.css';
 import currencyFilter from './filters/currency';
 import dateFilter from './filters/date';
-import 'swiper/css/swiper.css';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -35,6 +36,7 @@ Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
 Vue.filter('date', dateFilter);
 Vue.use(VueAwesomeSwiper);
+swiper.use([Navigation, Pagination, Autoplay]);
 axios.defaults.withCredentials = true;
 
 new Vue({
