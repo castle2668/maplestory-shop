@@ -1,4 +1,4 @@
-# MapleStoryShop (楓之谷商城)
+# MapleStory Shop (楓之谷商城)
 
 > 歡迎來到楓之谷商城，這是一份 Vue.js 電商網站的前端練習作品 (Vue CLI 4 + Vuex)
 
@@ -22,15 +22,15 @@
 16. [2020/02/15]：修正套件未正確載入的問題、產品詳細頁畫面修改
 17. [2020/02/16]：購物車與行動版畫面修改
 18. [2020/03/12]：更新至 Vue CLI 4 + Vuex 版本
+19. [2020/01/17]：更新專案內套件版本
 
 ## :pencil2: Skills | 使用技術
 
-- Vuex
-- Vue CLI 4
-- Vue Router
+- Vue 2.6.11 (Vue CLI + Vue Router + Vuex)
 - JavaScript (ES6)
 - ESLint (Airbnb)
-- API
+- Axios instance
+- RESTful API
 - Bootstrap 4
 - RWD
 - SCSS
@@ -100,11 +100,11 @@
 - [Google](https://www.google.com/)
 - [MapleStory.Wiki](https://maplestory.wiki/)
 - [The Spriters Resource](https://www.spriters-resource.com/)
-- [【楓之谷】遊戲GIF @ Raccoon :: 痞客邦 ::](https://a60814billy.pixnet.net/blog/post/25237273)
+- [【楓之谷】遊戲 GIF @ Raccoon :: 痞客邦 ::](https://a60814billy.pixnet.net/blog/post/25237273)
 - [HipWallpaper](https://hipwallpaper.com/)
 - [新楓之谷透視鏡](http://gametsg.techbang.com/maplestory/)
 - [RE:【情報】春風櫻爛漫，楓谷抽福袋](https://forum.gamer.com.tw/Co.php?bsn=7650&sn=6222785)
-- [新楓之谷maplestory中文官方網站—最團結的冒險！](https://tw.beanfun.com/maplestory/main.aspx)
+- [新楓之谷 maplestory 中文官方網站—最團結的冒險！](https://tw.beanfun.com/maplestory/main.aspx)
 
 ## :maple_leaf: About Shop | 關於楓之谷電商
 
@@ -117,9 +117,9 @@
 
 - 暱稱：海豹人
 - 描述：你不需要很厲害才能開始，但你需要開始才會很厲害
-- 狀態：目前大四
+- 狀態：目前是一位前端菜鳥
 - 專業：前端開發與資訊管理
-- 信箱：[ff1998725@gmail.com](mailto:ff1998725@gmail.com)
+- 信箱：[castle2668@gmail.com](mailto:castle2668@gmail.com)
 
 ## :paperclip: Statement | 聲明
 
