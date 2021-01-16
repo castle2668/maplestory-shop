@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="banner"></div>
+    <div class="banner" />
     <div class="category container py-5">
       <div class="row">
         <section class="col-12 col-lg-3">
@@ -8,12 +8,16 @@
             <a
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
-              @click.prevent="tempCategory = ''"
               :class="{'active': tempCategory === ''}"
+              @click.prevent="tempCategory = ''"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
-                  <img src="../assets/images/GIFs/pig.gif" height="50px" alt />
+                  <img
+                    src="../assets/images/GIFs/pig.gif"
+                    height="50px"
+                    alt
+                  >
                 </div>
                 <div class="col-md-8 align-self-center text-center text-md-left">
                   <p>所有商品</p>
@@ -23,12 +27,16 @@
             <a
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
-              @click.prevent="tempCategory = '熱銷商品'"
               :class="{'active': tempCategory === '熱銷商品'}"
+              @click.prevent="tempCategory = '熱銷商品'"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
-                  <img src="../assets/images/Korean Fan.png" height="50px" alt />
+                  <img
+                    src="../assets/images/Korean Fan.png"
+                    height="50px"
+                    alt
+                  >
                 </div>
                 <div class="col-md-8 align-self-center text-center text-md-left">
                   <p>熱銷商品</p>
@@ -38,12 +46,16 @@
             <a
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
-              @click.prevent="tempCategory = '最新商品'"
               :class="{'active': tempCategory === '最新商品'}"
+              @click.prevent="tempCategory = '最新商品'"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
-                  <img src="../assets/images/Poison Mushroom.png" height="50px" alt />
+                  <img
+                    src="../assets/images/Poison Mushroom.png"
+                    height="50px"
+                    alt
+                  >
                 </div>
                 <div class="col-md-8 align-self-center text-center text-md-left">
                   <p>最新商品</p>
@@ -53,12 +65,16 @@
             <a
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
-              @click.prevent="tempCategory = '楓葉武器'"
               :class="{'active': tempCategory === '楓葉武器'}"
+              @click.prevent="tempCategory = '楓葉武器'"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
-                  <img src="../assets/images/MapleScorpio.png" height="50px" alt />
+                  <img
+                    src="../assets/images/MapleScorpio.png"
+                    height="50px"
+                    alt
+                  >
                 </div>
                 <div class="col-md-8 align-self-center text-center text-md-left">
                   <p>楓葉武器</p>
@@ -68,12 +84,16 @@
             <a
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
-              @click.prevent="tempCategory = '楓葉防具'"
               :class="{'active': tempCategory === '楓葉防具'}"
+              @click.prevent="tempCategory = '楓葉防具'"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
-                  <img src="../assets/images/MapleShield.png" height="50px" alt />
+                  <img
+                    src="../assets/images/MapleShield.png"
+                    height="50px"
+                    alt
+                  >
                 </div>
                 <div class="col-md-8 align-self-center text-center text-md-left">
                   <p>楓葉防具</p>
@@ -83,8 +103,8 @@
             <a
               href="#"
               class="btn category-btn d-md-flex justify-content-center align-items-center p-3"
-              @click.prevent="tempCategory = '不速之客'"
               :class="{'active': tempCategory === '不速之客'}"
+              @click.prevent="tempCategory = '不速之客'"
             >
               <div class="row no-gutters">
                 <div class="col-md-4 align-self-center text-center text-md-right">
@@ -92,7 +112,7 @@
                     src="../assets/images/Last Unwelcome Guest Dagger (LUK).png"
                     height="50px"
                     alt
-                  />
+                  >
                 </div>
                 <div class="col-md-8 align-self-center text-center text-md-left">
                   <p>不速之客</p>
@@ -102,49 +122,72 @@
           </div>
         </section>
         <section class="col-12 col-lg-9">
-          <h3 v-if="tempCategory" class="py-2 py-lg-0">{{ tempCategory }}</h3>
-          <h3 v-else class="py-2 py-lg-0">所有商品</h3>
+          <h3
+            v-if="tempCategory"
+            class="py-2 py-lg-0"
+          >
+            {{ tempCategory }}
+          </h3>
+          <h3
+            v-else
+            class="py-2 py-lg-0"
+          >
+            所有商品
+          </h3>
           <div class="row mt-3">
-            <article class="col-md-6 col-lg-4 mb-4" v-for="item in activeProducts" :key="item.id">
-              <a @click.prevent="goDetail(item.id)" class="text-decoration-none"
-              style="cursor: pointer;">
+            <article
+              v-for="item in activeProducts"
+              :key="item.id"
+              class="col-md-6 col-lg-4 mb-4"
+            >
+              <a
+                class="text-decoration-none"
+                style="cursor: pointer;"
+                @click.prevent="goDetail(item.id)"
+              >
                 <div class="card border h-100">
                   <div class="border-bottom">
                     <span
-                      class="badge float-right badge-danger"
                       v-if="item.category === '熱銷商品'"
+                      class="badge float-right badge-danger"
                     >{{ item.category }}</span>
                     <span
-                      class="badge float-right badge-moderate"
                       v-if="item.category === '最新商品'"
+                      class="badge float-right badge-moderate"
                     >{{ item.category }}</span>
                     <span
-                      class="badge float-right badge-maple"
                       v-if="item.category==='楓葉武器' || item.category ==='楓葉防具'"
+                      class="badge float-right badge-maple"
                     >{{ item.category }}</span>
                     <span
-                      class="badge float-right badge-dark"
                       v-if="item.category === '不速之客'"
+                      class="badge float-right badge-dark"
                     >{{ item.category }}</span>
                     <figure
                       class="mt-4 mb-4 item-image"
                       :style="{backgroundImage: `url(${item.imageUrl})`}"
-                    ></figure>
+                    />
                   </div>
                   <div class="card-body">
                     <h4 class="card-title text-center">
-                      <a href="#" class="text-dark font-weight-bold">{{ item.title }}</a>
+                      <a
+                        href="#"
+                        class="text-dark font-weight-bold"
+                      >{{ item.title }}</a>
                     </h4>
                     <p class="card-text text-secondary text-center">{{ item.content }}</p>
                     <div class="d-flex justify-content-center align-items-end">
-                      <div class="h5" v-if="!item.price">{{ item.origin_price | currency }}</div>
+                      <div
+                        v-if="!item.price"
+                        class="h5"
+                      >{{ item.origin_price | currency }}</div>
                       <del
-                        class="h6 text-secondary pr-1"
                         v-if="item.price"
+                        class="h6 text-secondary pr-1"
                       >{{ item.origin_price | currency }}</del>
                       <div
-                        class="h5 text-maple font-weight-bold"
                         v-if="item.price"
+                        class="h5 text-maple font-weight-bold"
                       >{{ item.price | currency }}</div>
                     </div>
                   </div>
@@ -166,10 +209,10 @@
             </article>
           </div>
           <Pagination
-            v-bind:childPaginations="pagination"
-            @changeCurrentPage="getAllProducts"
             v-if="tempCategory===''"
-          ></Pagination>
+            :child-paginations="pagination"
+            @changeCurrentPage="getAllProducts"
+          />
         </section>
       </div>
     </div>
@@ -189,7 +232,25 @@ export default {
       tempCategory: '',
     };
   },
+  computed: {
+    ...mapGetters('productsModules', ['products', 'allProducts', 'pagination']),
+    // ...mapGetters(['allProducts', 'pagination']),
+    activeProducts() {
+      const vm = this;
+      if (vm.tempCategory === '') {
+        return vm.$store.state.productsModules.allProducts;
+      }
+      return vm.$store.state.productsModules.products.filter(
+        (item) => item.category === vm.tempCategory,
+      );
+    },
+  },
+  created() {
+    this.getAllProducts();
+    this.getProducts();
+  },
   methods: {
+    ...mapActions('productsModules', ['getProducts']),
     getAllProducts(page = 1) {
       this.$store.dispatch('productsModules/getAllProducts', page);
     },
@@ -202,24 +263,6 @@ export default {
         this.$router.push(path);
       }
     },
-    ...mapActions('productsModules', ['getProducts']),
-  },
-  computed: {
-    activeProducts() {
-      const vm = this;
-      if (vm.tempCategory === '') {
-        return vm.$store.state.productsModules.allProducts;
-      }
-      return vm.$store.state.productsModules.products.filter(
-        (item) => item.category === vm.tempCategory,
-      );
-    },
-    ...mapGetters('productsModules', ['products', 'allProducts', 'pagination']),
-    // ...mapGetters(['allProducts', 'pagination']),
-  },
-  created() {
-    this.getAllProducts();
-    this.getProducts();
   },
 };
 </script>

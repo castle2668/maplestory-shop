@@ -1,17 +1,17 @@
 <template>
   <div class="message-alert">
     <div
-      class="alert alert-dismissible"
-      :class="'alert-' + item.status"
       v-for="(item, i) in messages"
       :key="i"
+      class="alert alert-dismissible"
+      :class="'alert-' + item.status"
     >
       {{ item.message }}
       <button
         type="button"
         class="close"
-        @click="removeMessage(i)"
         aria-label="Close"
+        @click="removeMessage(i)"
       >
         <span aria-hidden="true">&times;</span>
       </button>
@@ -22,6 +22,11 @@
 <script>
 export default {
   name: 'Navbar',
+  computed: {
+    messages() {
+      return this.$store.state.messages;
+    },
+  },
   methods: {
     updateMessage(message, status) {
       this.$store.dispatch('updateMessage', { message, status });
@@ -38,11 +43,6 @@ export default {
           }
         });
       }, 5000);
-    },
-  },
-  computed: {
-    messages() {
-      return this.$store.state.messages;
     },
   },
 };

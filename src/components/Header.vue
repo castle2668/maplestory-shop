@@ -12,67 +12,78 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon" />
           </button>
           <div class="ms-logo">
             <h1 class="m-0">
-              <router-link to="/index" class="navbar-brand ml-auto m-0 p-0">MapleStory</router-link>
+              <router-link
+                to="/index"
+                class="navbar-brand ml-auto m-0 p-0"
+              >
+                MapleStory
+              </router-link>
             </h1>
           </div>
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div
+            id="navbarNav"
+            class="collapse navbar-collapse"
+          >
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/index"
                   class="nav-link p-3 py-lg-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-home"></i>
+                  <i class="fas fa-home" />
                   首頁
                 </router-link>
               </li>
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/category"
                   class="nav-link p-3 py-lg-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-box-open"></i>
+                  <i class="fas fa-box-open" />
                   所有商品
                 </router-link>
               </li>
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/customerOrder"
                   class="nav-link p-3 py-lg-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-shopping-cart"></i>
+                  <i class="fas fa-shopping-cart" />
                   購物車
                 </router-link>
               </li>
               <li class="nav-item">
-                <span></span>
-                <a class="nav-link p-3 py-lg-2" href="https://github.com/Sealman234">
-                  <i class="fab fa-github"></i>
+                <span />
+                <a
+                  class="nav-link p-3 py-lg-2"
+                  href="https://github.com/Sealman234"
+                >
+                  <i class="fab fa-github" />
                   關於作者
                 </a>
               </li>
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/login"
                   class="nav-link p-3 py-lg-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-user-cog"></i>
+                  <i class="fas fa-user-cog" />
                   登入
                 </router-link>
               </li>

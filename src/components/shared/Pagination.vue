@@ -2,7 +2,10 @@
   <div>
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item" :class="{'disabled': !childPaginations.has_pre}">
+        <li
+          class="page-item"
+          :class="{'disabled': !childPaginations.has_pre}"
+        >
           <a
             class="page-link"
             href="#"
@@ -13,14 +16,21 @@
           </a>
         </li>
         <li
-          class="page-item"
           v-for="page in childPaginations.total_pages"
           :key="page"
+          class="page-item"
           :class="{'active': childPaginations.current_page === page}"
         >
-          <a class="page-link" href="#" @click.prevent="getCurrentPage(page)">{{ page }}</a>
+          <a
+            class="page-link"
+            href="#"
+            @click.prevent="getCurrentPage(page)"
+          >{{ page }}</a>
         </li>
-        <li class="page-item" :class="{'disabled': !childPaginations.has_next}">
+        <li
+          class="page-item"
+          :class="{'disabled': !childPaginations.has_next}"
+        >
           <a
             class="page-link"
             href="#"
@@ -41,6 +51,9 @@ export default {
   props: {
     childPaginations: {
       type: Object,
+      default() {
+        return {};
+      },
     },
   },
   methods: {

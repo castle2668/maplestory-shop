@@ -8,34 +8,34 @@
             width="560px"
             class="position-absolute people-lg d-none d-md-block"
             style="bottom: -2px; right: 0;"
-          />
+          >
           <img
             src="../assets/images/GIFs/mushroom.gif"
             width="70px"
             class="position-absolute d-md-none"
             style="bottom: -2px; right: 0px;"
-          />
+          >
           <img
             src="../assets/images/GIFs/mushroom2.gif"
             width="70px"
             class="position-absolute d-md-none"
             style="bottom: -2px; left: 150px;"
-          />
+          >
           <img
             src="../assets/images/roger.png"
             width="70px"
             class="position-absolute"
             style="bottom: -2px; left: 80px;"
-          />
+          >
           <img
             src="../assets/images/mary.png"
             width="70px"
             class="position-absolute"
             style="bottom: -2px; left: 0px;"
-          />
+          >
         </div>
       </div>
-      <Tiles></Tiles>
+      <Tiles />
     </footer>
   </div>
 </template>

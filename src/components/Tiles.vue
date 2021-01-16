@@ -3,7 +3,7 @@
     <div class="tiles d-flex justify-content-center align-items-center">
       <p class="m-0">
         Copyright © 2020 Sealman234.
-        <br />All images and other content related to MapleStory are owned by Nexon Corporation.
+        <br>All images and other content related to MapleStory are owned by Nexon Corporation.
       </p>
     </div>
   </div>

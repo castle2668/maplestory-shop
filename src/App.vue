@@ -2,10 +2,10 @@
   <div id="app">
     <loading :active.sync="isLoading">
       <template slot="default">
-        <div class="loading-image"></div>
+        <div class="loading-image" />
       </template>
     </loading>
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 

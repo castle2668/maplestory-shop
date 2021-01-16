@@ -1,11 +1,14 @@
 <template>
   <div>
     <Navbar />
-    <Alert></Alert>
+    <Alert />
     <div class="container-fluid container-lg">
       <div class="row justify-content-center">
-        <main role="main" class="col-12">
-          <router-view></router-view>
+        <main
+          role="main"
+          class="col-12"
+        >
+          <router-view />
         </main>
       </div>
     </div>

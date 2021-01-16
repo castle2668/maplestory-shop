@@ -1,12 +1,12 @@
 <template>
   <div>
-    <Header></Header>
-    <Alert></Alert>
+    <Header />
+    <Alert />
     <main>
-      <router-view></router-view>
+      <router-view />
     </main>
-    <Cart></Cart>
-    <Footer></Footer>
+    <Cart />
+    <Footer />
   </div>
 </template>
 

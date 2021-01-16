@@ -12,55 +12,67 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon" />
           </button>
           <div class="ms-logo">
             <h1 class="m-0">
-              <router-link to="/index" class="navbar-brand ml-auto m-0 p-0">MapleStory</router-link>
+              <router-link
+                to="/index"
+                class="navbar-brand ml-auto m-0 p-0"
+              >
+                MapleStory
+              </router-link>
             </h1>
           </div>
-          <div class="collapse navbar-collapse" id="navbarNav">
+          <div
+            id="navbarNav"
+            class="collapse navbar-collapse"
+          >
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/admin/products"
                   class="nav-link p-3 py-md-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-box-open"></i>
+                  <i class="fas fa-box-open" />
                   產品列表
                 </router-link>
               </li>
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/admin/orders"
                   class="nav-link p-3 py-md-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-cart-arrow-down"></i>
+                  <i class="fas fa-cart-arrow-down" />
                   訂單列表
                 </router-link>
               </li>
               <li class="nav-item">
-                <span></span>
+                <span />
                 <router-link
                   to="/admin/coupons"
                   class="nav-link p-3 py-md-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
-                  <i class="fas fa-money-check-alt"></i>
+                  <i class="fas fa-money-check-alt" />
                   優惠券列表
                 </router-link>
               </li>
               <li class="nav-item">
-                <span></span>
-                <a class="nav-link p-3 py-md-2" href="#" @click.prevent="signout">
-                  <i class="fas fa-sign-out-alt"></i>
+                <span />
+                <a
+                  class="nav-link p-3 py-md-2"
+                  href="#"
+                  @click.prevent="signout"
+                >
+                  <i class="fas fa-sign-out-alt" />
                   登出
                 </a>
               </li>
