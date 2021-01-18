@@ -1,6 +1,6 @@
 import Vue from 'vue';
+// 第三方套件
 import axios from 'axios';
-import Vuex from 'vuex';
 import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -12,6 +12,8 @@ import './bus';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import swiper, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
+// Vue
+import Vuex from 'vuex';
 import currencyFilter from './filters/currency';
 import dateFilter from './filters/date';
 import App from './App.vue';
@@ -19,8 +21,10 @@ import router from './router';
 import store from './store';
 
 Vue.config.productionTip = false;
+// 第三方套件
 Vue.use(VueAxios, axios);
-Vue.use(Vuex);
+axios.defaults.withCredentials = true;
+Vue.component('Loading', Loading);
 Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'zhTW',
@@ -32,12 +36,12 @@ Vue.use(VeeValidate, {
     zhTW,
   },
 });
-Vue.component('Loading', Loading);
-Vue.filter('currency', currencyFilter);
-Vue.filter('date', dateFilter);
 Vue.use(VueAwesomeSwiper);
 swiper.use([Navigation, Pagination, Autoplay]);
-axios.defaults.withCredentials = true;
+// Vue
+Vue.filter('currency', currencyFilter);
+Vue.filter('date', dateFilter);
+Vue.use(Vuex);
 
 new Vue({
   router,
