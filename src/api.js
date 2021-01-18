@@ -8,7 +8,7 @@ axios.defaults.headers.common.Authorization = myCookie;
 const shopRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}/api/${VUE_APP_CUSTOMPATH}`,
   headers: {
-    'content-type': 'application/json',
+    'Content-Type': 'application/json',
     // Authorization: myCookie,
   },
 });
@@ -16,7 +16,7 @@ const shopRequest = axios.create({
 const userRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}`,
   headers: {
-    'content-type': 'application/json',
+    'Content-Type': 'application/json',
     // Authorization: myCookie,
   },
 });
@@ -24,7 +24,7 @@ const userRequest = axios.create({
 const uploadFileRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}/api/${VUE_APP_CUSTOMPATH}`,
   headers: {
-    'content-type': 'multipart/form-data',
+    'Content-Type': 'multipart/form-data',
     // Authorization: myCookie,
   },
 });
