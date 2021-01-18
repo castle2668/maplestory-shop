@@ -320,14 +320,14 @@ export default {
           prevEl: '.swiper-button-prev.swp1',
         },
         breakpoints: {
-          544: {
+          320: {
             slidesPerView: 1,
           },
-          767: {
+          768: {
             slidesPerView: 2,
             centeredSlides: false,
           },
-          991: {
+          992: {
             slidesPerView: 3,
             centeredSlides: true,
           },
@@ -345,19 +345,19 @@ export default {
           delay: 5000,
         },
         breakpoints: {
-          544: {
+          320: {
             slidesPerView: 1,
             spaceBetween: 10,
           },
-          767: {
+          768: {
             slidesPerView: 2,
             centeredSlides: true,
           },
-          991: {
+          992: {
             slidesPerView: 3,
             centeredSlides: true,
           },
-          1023: {
+          1024: {
             slidesPerView: 4,
             centeredSlides: false,
           },
@@ -375,21 +375,21 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('productsModules', ['products']),
+    ...mapGetters('products', ['products']),
     swiper() {
       return this.$refs.mySwiper.swiper;
     },
     hotProducts() {
-      return this.$store.state.productsModules.products.filter((item) => item.category === '熱銷商品');
+      return this.$store.state.products.products.filter((item) => item.category === '熱銷商品');
     },
   },
   created() {
     this.getProducts();
   },
   methods: {
-    ...mapActions('productsModules', ['getProducts']),
+    ...mapActions('products', ['getProducts']),
     buyNow(id, qty = 1) {
-      this.$store.dispatch('buyNow', { id, qty });
+      this.$store.dispatch('global/buyNow', { id, qty });
     },
   },
 };

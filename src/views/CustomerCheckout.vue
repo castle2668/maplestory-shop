@@ -186,22 +186,22 @@ export default {
     getOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      vm.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('global/updateLoading', true);
       vm.$http.get(url).then((response) => {
         vm.order = response.data.order;
-        vm.$store.dispatch('updateLoading', false);
+        vm.$store.dispatch('global/updateLoading', false);
       });
     },
     payOrder() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      vm.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('global/updateLoading', true);
       vm.$http.post(url).then((response) => {
         if (response.data.success) {
           vm.getOrder();
           vm.$bus.$emit('cartCreate:push');
         }
-        vm.$store.dispatch('updateLoading', false);
+        vm.$store.dispatch('global/updateLoading', false);
       });
     },
   },

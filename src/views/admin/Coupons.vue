@@ -272,9 +272,9 @@ export default {
     getCoupons(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      vm.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('global/updateLoading', true);
       vm.$http.get(api).then((response) => {
-        vm.$store.dispatch('updateLoading', false);
+        vm.$store.dispatch('global/updateLoading', false);
         vm.coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
       });

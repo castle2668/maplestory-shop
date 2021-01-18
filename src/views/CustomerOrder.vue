@@ -317,7 +317,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['cart']),
+    ...mapGetters('global', ['cart']),
   },
   watch: {
     cart() {
@@ -333,12 +333,12 @@ export default {
     this.getCart();
   },
   methods: {
-    ...mapActions(['getCart']),
+    ...mapActions('global', ['getCart']),
     removeCartItem(id) {
-      this.$store.dispatch('removeCart', id);
+      this.$store.dispatch('global/removeCart', id);
     },
     addCouponCode() {
-      this.$store.dispatch('addCouponCode', this.coupon_code);
+      this.$store.dispatch('global/addCouponCode', this.coupon_code);
     },
     createOrder() {
       const vm = this;
@@ -350,22 +350,22 @@ export default {
             if (response.data.success) {
               vm.$router.push(`/customerCheckout/${response.data.orderId}`);
             }
-            vm.$store.dispatch('updateLoading', false);
+            vm.$store.dispatch('global/updateLoading', false);
           });
         }
       });
     },
     addQty(cid, pid, qty) {
       const newQty = Number(qty) + 1;
-      this.$store.dispatch('updateQty', { cid, pid, newQty });
+      this.$store.dispatch('global/updateQty', { cid, pid, newQty });
     },
     minusQty(cid, pid, qty) {
       const newQty = Number(qty) - 1;
-      this.$store.dispatch('updateQty', { cid, pid, newQty });
+      this.$store.dispatch('global/updateQty', { cid, pid, newQty });
     },
     updateQtyBySelect(cid, pid, $event) {
       const newQty = Number($event.target.value);
-      this.$store.dispatch('updateQtyBySelect', { cid, pid, newQty });
+      this.$store.dispatch('global/updateQtyBySelect', { cid, pid, newQty });
     },
   },
 };

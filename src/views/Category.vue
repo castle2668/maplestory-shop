@@ -233,14 +233,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('productsModules', ['products', 'allProducts', 'pagination']),
+    ...mapGetters('products', ['products', 'allProducts', 'pagination']),
     // ...mapGetters(['allProducts', 'pagination']),
     activeProducts() {
       const vm = this;
       if (vm.tempCategory === '') {
-        return vm.$store.state.productsModules.allProducts;
+        return vm.$store.state.products.allProducts;
       }
-      return vm.$store.state.productsModules.products.filter(
+      return vm.$store.state.products.products.filter(
         (item) => item.category === vm.tempCategory,
       );
     },
@@ -250,12 +250,12 @@ export default {
     this.getProducts();
   },
   methods: {
-    ...mapActions('productsModules', ['getProducts']),
+    ...mapActions('products', ['getProducts']),
     getAllProducts(page = 1) {
-      this.$store.dispatch('productsModules/getAllProducts', page);
+      this.$store.dispatch('products/getAllProducts', page);
     },
     addToCart(id, qty = 1) {
-      this.$store.dispatch('addToCart', { id, qty });
+      this.$store.dispatch('global/addToCart', { id, qty });
     },
     goDetail(id) {
       const path = `/detail/${id}`;

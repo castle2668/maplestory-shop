@@ -195,16 +195,16 @@ export default {
     const vm = this;
     const { id } = vm.$route.params;
     const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-    vm.$store.dispatch('updateLoading', true);
+    vm.$store.dispatch('global/updateLoading', true);
     vm.$http.get(url).then((response) => {
       vm.product = response.data.product;
       vm.$set(vm.product, 'num', 0);
-      vm.$store.dispatch('updateLoading', false);
+      vm.$store.dispatch('global/updateLoading', false);
     });
   },
   methods: {
     addToCart(id, qty = 1) {
-      this.$store.dispatch('addToCart', { id, qty });
+      this.$store.dispatch('global/addToCart', { id, qty });
     },
     enablingBtn() {
       document.querySelector('.disabledBtn').disabled = false;

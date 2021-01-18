@@ -24,15 +24,15 @@ export default {
   name: 'Navbar',
   computed: {
     messages() {
-      return this.$store.state.messages;
+      return this.$store.state.global.messages;
     },
   },
   methods: {
     updateMessage(message, status) {
-      this.$store.dispatch('updateMessage', { message, status });
+      this.$store.dispatch('global/updateMessage', { message, status });
     },
     removeMessage(num) {
-      this.$store.dispatch('removeMessage', num);
+      this.$store.dispatch('global/removeMessage', num);
     },
     removeMessageWithTiming(timestamp) {
       const vm = this;

@@ -14,7 +14,7 @@ export default {
   name: 'App',
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      return this.$store.state.global.isLoading;
     },
   },
 };

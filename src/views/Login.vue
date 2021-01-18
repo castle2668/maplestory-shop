@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { apiSignin } from '@/api';
 import Header from '../components/Header.vue';
 
 export default {
@@ -63,17 +64,27 @@ export default {
     };
   },
   methods: {
-    signin() {
-      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
-      const vm = this;
-      vm.$http.post(api, vm.user).then((response) => {
-        if (response.data.success) {
-          const path = '/admin/products';
-          if (vm.$route.path !== path) {
-            vm.$router.push(path);
-          }
-        }
-      });
+    async signin() {
+      // const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
+      // const vm = this;
+      // vm.$http.post(api, vm.user).then((response) => {
+      //   if (response.data.success) {
+      //     const { token } = response.data;
+      //     const { expired } = response.data;
+      //     console.log(token, expired);
+      //     document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
+      //     const path = '/admin/products';
+      //     if (vm.$route.path !== path) {
+      //       vm.$router.push(path);
+      //     }
+      //   }
+      // });
+      const response = await apiSignin(this.user);
+      const { token, expired } = response.data;
+      document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
+      if (this.$route.path !== '/admin/products') {
+        this.$router.push('/admin/products');
+      }
     },
   },
 };
