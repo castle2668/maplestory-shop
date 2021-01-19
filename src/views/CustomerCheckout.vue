@@ -157,6 +157,7 @@
 </template>
 
 <script>
+import { apiGetOrder, apiPayOrder } from '@/api';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Alert from '../components/shared/AlertMessage.vue';
@@ -183,26 +184,39 @@ export default {
     vm.getOrder();
   },
   methods: {
-    getOrder() {
+    async getOrder() {
       const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
+      // const url = `
+      // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
+      // vm.$store.dispatch('global/updateLoading', true);
+      // vm.$http.get(url).then((response) => {
+      //   vm.order = response.data.order;
+      //   vm.$store.dispatch('global/updateLoading', false);
+      // });
       vm.$store.dispatch('global/updateLoading', true);
-      vm.$http.get(url).then((response) => {
-        vm.order = response.data.order;
-        vm.$store.dispatch('global/updateLoading', false);
-      });
+      const response = await apiGetOrder(vm.orderId);
+      vm.order = response.data.order;
+      vm.$store.dispatch('global/updateLoading', false);
     },
-    payOrder() {
+    async payOrder() {
       const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
+      // const url = `
+      // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
+      // vm.$store.dispatch('global/updateLoading', true);
+      // vm.$http.post(url).then((response) => {
+      //   if (response.data.success) {
+      //     vm.getOrder();
+      //     vm.$bus.$emit('cartCreate:push');
+      //   }
+      //   vm.$store.dispatch('global/updateLoading', false);
+      // });
       vm.$store.dispatch('global/updateLoading', true);
-      vm.$http.post(url).then((response) => {
-        if (response.data.success) {
-          vm.getOrder();
-          vm.$bus.$emit('cartCreate:push');
-        }
-        vm.$store.dispatch('global/updateLoading', false);
-      });
+      const response = await apiPayOrder(vm.orderId);
+      if (response.data.success) {
+        vm.getOrder();
+        vm.$bus.$emit('cartCreate:push');
+      }
+      vm.$store.dispatch('global/updateLoading', false);
     },
   },
 };

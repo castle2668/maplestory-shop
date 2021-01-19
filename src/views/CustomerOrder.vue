@@ -290,6 +290,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { apiCreateOrder } from '@/api';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import Alert from '../components/shared/AlertMessage.vue';
@@ -340,20 +341,28 @@ export default {
     addCouponCode() {
       this.$store.dispatch('global/addCouponCode', this.coupon_code);
     },
-    createOrder() {
+    async createOrder() {
       const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
+      // const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
       const order = vm.form;
-      vm.$validator.validate().then((result) => {
-        if (result) {
-          vm.$http.post(url, { data: order }).then((response) => {
-            if (response.data.success) {
-              vm.$router.push(`/customerCheckout/${response.data.orderId}`);
-            }
-            vm.$store.dispatch('global/updateLoading', false);
-          });
+      // vm.$validator.validate().then((result) => {
+      //   if (result) {
+      //     vm.$http.post(url, { data: order }).then((response) => {
+      //       if (response.data.success) {
+      //         vm.$router.push(`/customerCheckout/${response.data.orderId}`);
+      //       }
+      //       vm.$store.dispatch('global/updateLoading', false);
+      //     });
+      //   }
+      // });
+      const result = await vm.$validator.validate();
+      if (result) {
+        const response = await apiCreateOrder({ data: order });
+        if (response.data.success) {
+          vm.$router.push(`/customerCheckout/${response.data.orderId}`);
         }
-      });
+        vm.$store.dispatch('global/updateLoading', false);
+      }
     },
     addQty(cid, pid, qty) {
       const newQty = Number(qty) + 1;

@@ -243,6 +243,9 @@
 
 <script>
 import $ from 'jquery';
+import {
+  apiAdminGetCoupon, apiAdminUpdateCoupon, apiAdminAddCoupon, apiAdminDeleteCoupon,
+} from '@/api';
 import Pagination from '../../components/shared/Pagination.vue';
 
 export default {
@@ -269,15 +272,21 @@ export default {
     this.getCoupons();
   },
   methods: {
-    getCoupons(page = 1) {
+    async getCoupons(page = 1) {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
+      // const api = `${process.env.VUE_APP_APIPATH}/api/
+      // ${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
+      // vm.$store.dispatch('global/updateLoading', true);
+      // vm.$http.get(api).then((response) => {
+      //   vm.$store.dispatch('global/updateLoading', false);
+      //   vm.coupons = response.data.coupons;
+      //   vm.pagination = response.data.pagination;
+      // });
       vm.$store.dispatch('global/updateLoading', true);
-      vm.$http.get(api).then((response) => {
-        vm.$store.dispatch('global/updateLoading', false);
-        vm.coupons = response.data.coupons;
-        vm.pagination = response.data.pagination;
-      });
+      const response = await apiAdminGetCoupon(page);
+      vm.$store.dispatch('global/updateLoading', false);
+      vm.coupons = response.data.coupons;
+      vm.pagination = response.data.pagination;
     },
     openModal(isNew, item) {
       const vm = this;
@@ -289,44 +298,68 @@ export default {
         vm.tempCoupon = { ...item };
         vm.isNew = false;
         const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
-        [vm.due_date] = [dateAndTime];
+        vm.$set(this, 'due_date', dateAndTime[0]);
       }
       $('#couponModal').modal('show');
     },
-    updateCoupon() {
-      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
+    async updateCoupon() {
+      // let api = `
+      // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
       const vm = this;
-      let httpMethod = 'post';
+      // let httpMethod = 'post';
+      // if (!vm.isNew) {
+      //   api = `${process.env.VUE_APP_APIPATH}
+      // /api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+      //   httpMethod = 'put';
+      // }
+      // vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
+      //   if (response.data.success) {
+      //     $('#couponModal').modal('hide');
+      //     vm.getCoupons();
+      //   } else {
+      //     $('#couponModal').modal('hide');
+      //     vm.getCoupons();
+      //   }
+      // });
+      let response;
       if (!vm.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-        httpMethod = 'put';
+        response = await apiAdminUpdateCoupon(vm.tempCoupon.id, { data: vm.tempCoupon });
+      } else {
+        response = await apiAdminAddCoupon({ data: vm.tempCoupon });
       }
-      vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
-        if (response.data.success) {
-          $('#couponModal').modal('hide');
-          vm.getCoupons();
-        } else {
-          $('#couponModal').modal('hide');
-          vm.getCoupons();
-        }
-      });
+      if (response.data.success) {
+        $('#couponModal').modal('hide');
+        vm.getCoupons();
+      } else {
+        $('#couponModal').modal('hide');
+        vm.getCoupons();
+      }
     },
     openDelModal(item) {
       this.tempCoupon = item;
       $('#delCouponModal').modal('show');
     },
-    deleteCoupon() {
+    async deleteCoupon() {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-      vm.$http.delete(api).then((response) => {
-        if (response.data.success) {
-          $('#delCouponModal').modal('hide');
-          vm.getCoupons();
-        } else {
-          $('#delCouponModal').modal('hide');
-          vm.getCoupons();
-        }
-      });
+      // const api = `${process.env.VUE_APP_APIPATH}
+      // /api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+      // vm.$http.delete(api).then((response) => {
+      //   if (response.data.success) {
+      //     $('#delCouponModal').modal('hide');
+      //     vm.getCoupons();
+      //   } else {
+      //     $('#delCouponModal').modal('hide');
+      //     vm.getCoupons();
+      //   }
+      // });
+      const response = await apiAdminDeleteCoupon(vm.tempCoupon.id);
+      if (response.data.success) {
+        $('#delCouponModal').modal('hide');
+        vm.getCoupons();
+      } else {
+        $('#delCouponModal').modal('hide');
+        vm.getCoupons();
+      }
     },
   },
 };

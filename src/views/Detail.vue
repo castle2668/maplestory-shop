@@ -183,6 +183,8 @@
 </template>
 
 <script>
+import { apiGetProductDetail } from '@/api';
+
 export default {
   data() {
     return {
@@ -191,16 +193,22 @@ export default {
       },
     };
   },
-  created() {
+  async created() {
     const vm = this;
     const { id } = vm.$route.params;
-    const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+    // const url = `
+    // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+    // vm.$store.dispatch('global/updateLoading', true);
+    // vm.$http.get(url).then((response) => {
+    //   vm.product = response.data.product;
+    //   vm.$set(vm.product, 'num', 0);
+    //   vm.$store.dispatch('global/updateLoading', false);
+    // });
     vm.$store.dispatch('global/updateLoading', true);
-    vm.$http.get(url).then((response) => {
-      vm.product = response.data.product;
-      vm.$set(vm.product, 'num', 0);
-      vm.$store.dispatch('global/updateLoading', false);
-    });
+    const response = await apiGetProductDetail(id);
+    vm.product = response.data.product;
+    vm.$set(vm.product, 'num', 0);
+    vm.$store.dispatch('global/updateLoading', false);
   },
   methods: {
     addToCart(id, qty = 1) {

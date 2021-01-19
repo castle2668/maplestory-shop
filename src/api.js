@@ -42,7 +42,7 @@ export const apiAddCoupon = (json) => shopRequest.post('/coupon', json);
 // 前台 Product
 export const apiGetAllProducts = () => shopRequest.get('/products/all');
 export const apiGetPageProducts = (page) => shopRequest.get(`/products?page=${page}`);
-export const apiGetProductDetail = (id) => shopRequest.get(`/products/${id}`);
+export const apiGetProductDetail = (id) => shopRequest.get(`/product/${id}`);
 // 前台 Order
 export const apiCreateOrder = (json) => shopRequest.post('/order', json);
 export const apiGetOrder = (id) => shopRequest.get(`/order/${id}`);
@@ -56,7 +56,7 @@ export const apiAdminDeleteProduct = (id) => shopRequest.delete(`/admin/product/
 // 後台 Coupon
 export const apiAdminGetCoupon = (page) => shopRequest.get(`/admin/coupons?page=${page}`);
 export const apiAdminAddCoupon = (json) => shopRequest.post('/admin/coupon', json);
-export const apiAdminUpdateCoupon = (id) => shopRequest.put(`/admin/coupon/${id}`);
+export const apiAdminUpdateCoupon = (id, json) => shopRequest.put(`/admin/coupon/${id}`, json);
 export const apiAdminDeleteCoupon = (id) => shopRequest.delete(`/admin/coupon/${id}`);
 // 後台 Order
 export const apiAdminGetOrder = (page) => shopRequest.get(`/admin/orders?page=${page}`);
