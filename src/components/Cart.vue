@@ -228,8 +228,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
 import $ from 'jquery';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Cart',
@@ -248,16 +248,14 @@ export default {
     ...mapActions('global', ['getCart']),
     goCheckout() {
       $('#cartModal').modal('hide');
-      const path = '/customerOrder';
-      if (this.$route.path !== path) {
-        this.$router.push(path);
+      if (this.$route.path !== '/customerOrder') {
+        this.$router.push('/customerOrder');
       }
     },
     goShopping() {
       $('#cartModal').modal('hide');
-      const path = '/category';
-      if (this.$route.path !== path) {
-        this.$router.push(path);
+      if (this.$route.path !== '/category') {
+        this.$router.push('/category');
       }
     },
     removeCart(id) {

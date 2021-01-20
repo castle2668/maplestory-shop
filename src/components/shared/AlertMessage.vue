@@ -1,15 +1,16 @@
 <template>
   <div class="message-alert">
     <div
-      v-for="(item, i) in messages"
-      :key="i"
-      class="alert alert-dismissible"
-      :class="'alert-' + item.status"
+      v-for="(item, index) in messages"
+      :key="index"
+      :class="[`alert alert-dismissible fade show alert-${item.status}`]"
+      role="alert"
     >
       {{ item.message }}
       <button
         type="button"
         class="close"
+        data-dismiss="alert"
         aria-label="Close"
         @click="removeMessage(i)"
       >
@@ -20,17 +21,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Navbar',
   computed: {
-    messages() {
-      return this.$store.state.global.messages;
-    },
+    ...mapState('global', ['messages']),
   },
   methods: {
-    updateMessage(message, status) {
-      this.$store.dispatch('global/updateMessage', { message, status });
-    },
     removeMessage(num) {
       this.$store.dispatch('global/removeMessage', num);
     },

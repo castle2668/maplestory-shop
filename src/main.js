@@ -8,7 +8,6 @@ import 'bootstrap';
 import VeeValidate from 'vee-validate';
 import zhTW from 'vee-validate/dist/locale/zh_TW';
 import VueI18n from 'vue-i18n';
-import './bus';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import swiper, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';

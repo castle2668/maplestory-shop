@@ -15,7 +15,9 @@ export async function getCart(context) {
 }
 
 export async function removeCart(context, id) {
+  context.commit('LOADING', true);
   const response = await apiRemoveCart(id);
+  context.commit('LOADING', false);
   if (response.data.success) {
     context.dispatch('updateMessage', { message: '產品刪除成功', status: 'success' });
     context.dispatch('getCart');

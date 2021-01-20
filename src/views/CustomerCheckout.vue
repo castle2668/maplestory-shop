@@ -197,7 +197,7 @@ export default {
       const response = await apiPayOrder(vm.orderId);
       if (response.data.success) {
         vm.getOrder();
-        vm.$bus.$emit('cartCreate:push');
+        vm.$store.dispatch('global/updateMessage', { message: '已完成付款！', status: 'success' });
       }
       vm.$store.dispatch('global/updateLoading', false);
     },
