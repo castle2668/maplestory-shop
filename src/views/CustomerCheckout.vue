@@ -121,7 +121,7 @@
                 class="text-right"
               >
                 <router-link
-                  to="/index"
+                  to="/"
                   class="btn btn-outline-maple"
                 >
                   取消購買
@@ -135,7 +135,7 @@
                 class="text-right"
               >
                 <router-link
-                  to="/index"
+                  to="/"
                   class="btn btn-outline-maple"
                 >
                   回到首頁

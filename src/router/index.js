@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes = [{
   path: '*',
-  redirect: '/index',
+  redirect: '/',
 },
 {
   name: 'Dashboard',
@@ -40,11 +40,11 @@ const routes = [{
 {
   name: 'Base',
   path: '/',
-  redirect: '/index',
+  redirect: '/',
   component: () => import('@/components/Base.vue'),
   children: [{
     name: 'Index',
-    path: '/index',
+    path: '/',
     component: () => import('@/views/Index.vue'),
   },
   {

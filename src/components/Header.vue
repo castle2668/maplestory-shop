@@ -17,7 +17,7 @@
           <div class="ms-logo">
             <h1 class="m-0">
               <router-link
-                to="/index"
+                to="/"
                 class="navbar-brand ml-auto m-0 p-0"
               >
                 MapleStory
@@ -32,7 +32,7 @@
               <li class="nav-item">
                 <span />
                 <router-link
-                  to="/index"
+                  to="/"
                   class="nav-link p-3 py-lg-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
@@ -70,6 +70,7 @@
                 <a
                   class="nav-link p-3 py-lg-2"
                   href="https://github.com/Sealman234"
+                  target="_blank"
                 >
                   <i class="fab fa-github" />
                   關於作者

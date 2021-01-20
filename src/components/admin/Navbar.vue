@@ -17,7 +17,7 @@
           <div class="ms-logo">
             <h1 class="m-0">
               <router-link
-                to="/index"
+                to="/"
                 class="navbar-brand ml-auto m-0 p-0"
               >
                 MapleStory

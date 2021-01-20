@@ -5,7 +5,7 @@
         <ol class="breadcrumb bg-white">
           <li class="breadcrumb-item">
             <router-link
-              to="/index"
+              to="/"
               class="text-maple"
             >
               首頁
