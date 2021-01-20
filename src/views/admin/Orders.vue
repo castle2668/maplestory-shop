@@ -109,15 +109,6 @@ export default {
   methods: {
     async getOrders(currentPage = 1) {
       const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}
-      // /api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${currentPage}`;
-      // vm.$store.dispatch('global/updateLoading', true);
-      // vm.$http.get(api).then((response) => {
-      //   vm.$store.dispatch('global/updateLoading', false);
-      //   vm.orders = response.data.orders;
-      //   vm.pagination = response.data.pagination;
-      // });
-
       vm.$store.dispatch('global/updateLoading', true);
       const response = await apiAdminGetOrder(currentPage);
       vm.$store.dispatch('global/updateLoading', false);

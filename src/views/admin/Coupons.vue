@@ -274,14 +274,6 @@ export default {
   methods: {
     async getCoupons(page = 1) {
       const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}/api/
-      // ${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      // vm.$store.dispatch('global/updateLoading', true);
-      // vm.$http.get(api).then((response) => {
-      //   vm.$store.dispatch('global/updateLoading', false);
-      //   vm.coupons = response.data.coupons;
-      //   vm.pagination = response.data.pagination;
-      // });
       vm.$store.dispatch('global/updateLoading', true);
       const response = await apiAdminGetCoupon(page);
       vm.$store.dispatch('global/updateLoading', false);
@@ -303,24 +295,7 @@ export default {
       $('#couponModal').modal('show');
     },
     async updateCoupon() {
-      // let api = `
-      // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
       const vm = this;
-      // let httpMethod = 'post';
-      // if (!vm.isNew) {
-      //   api = `${process.env.VUE_APP_APIPATH}
-      // /api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-      //   httpMethod = 'put';
-      // }
-      // vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
-      //   if (response.data.success) {
-      //     $('#couponModal').modal('hide');
-      //     vm.getCoupons();
-      //   } else {
-      //     $('#couponModal').modal('hide');
-      //     vm.getCoupons();
-      //   }
-      // });
       let response;
       if (!vm.isNew) {
         response = await apiAdminUpdateCoupon(vm.tempCoupon.id, { data: vm.tempCoupon });
@@ -341,17 +316,6 @@ export default {
     },
     async deleteCoupon() {
       const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}
-      // /api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-      // vm.$http.delete(api).then((response) => {
-      //   if (response.data.success) {
-      //     $('#delCouponModal').modal('hide');
-      //     vm.getCoupons();
-      //   } else {
-      //     $('#delCouponModal').modal('hide');
-      //     vm.getCoupons();
-      //   }
-      // });
       const response = await apiAdminDeleteCoupon(vm.tempCoupon.id);
       if (response.data.success) {
         $('#delCouponModal').modal('hide');

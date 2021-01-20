@@ -65,20 +65,6 @@ export default {
   },
   methods: {
     async signin() {
-      // const api = `${process.env.VUE_APP_APIPATH}/admin/signin`;
-      // const vm = this;
-      // vm.$http.post(api, vm.user).then((response) => {
-      //   if (response.data.success) {
-      //     const { token } = response.data;
-      //     const { expired } = response.data;
-      //     console.log(token, expired);
-      //     document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
-      //     const path = '/admin/products';
-      //     if (vm.$route.path !== path) {
-      //       vm.$router.push(path);
-      //     }
-      //   }
-      // });
       const response = await apiSignin(this.user);
       const { token, expired } = response.data;
       document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;

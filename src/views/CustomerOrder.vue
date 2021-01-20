@@ -343,18 +343,7 @@ export default {
     },
     async createOrder() {
       const vm = this;
-      // const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
       const order = vm.form;
-      // vm.$validator.validate().then((result) => {
-      //   if (result) {
-      //     vm.$http.post(url, { data: order }).then((response) => {
-      //       if (response.data.success) {
-      //         vm.$router.push(`/customerCheckout/${response.data.orderId}`);
-      //       }
-      //       vm.$store.dispatch('global/updateLoading', false);
-      //     });
-      //   }
-      // });
       const result = await vm.$validator.validate();
       if (result) {
         const response = await apiCreateOrder({ data: order });

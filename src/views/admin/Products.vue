@@ -355,15 +355,6 @@ export default {
   methods: {
     async getProducts(page = 1) {
       const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}/
-      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
-      // vm.$store.dispatch('global/updateLoading', true);
-      // vm.$http.get(api).then((response) => {
-      //   vm.$store.dispatch('global/updateLoading', false);
-      //   vm.products = response.data.products;
-      //   vm.pagination = response.data.pagination;
-      // });
-
       vm.$store.dispatch('global/updateLoading', true);
       const response = await apiAdminGetProducts(page);
       vm.$store.dispatch('global/updateLoading', false);
@@ -382,26 +373,7 @@ export default {
       $('#productModal').modal('show');
     },
     async updateProduct() {
-      // let api = `${process.env.VUE_APP_APIPATH}/
-      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
       const vm = this;
-
-      // let httpMethod = 'post';
-      // if (!vm.isNew) {
-      //   api = `${process.env.VUE_APP_APIPATH}/
-      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      //   httpMethod = 'put';
-      // }
-      // vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
-      //   if (response.data.success) {
-      //     $('#productModal').modal('hide');
-      //     vm.getProducts();
-      //   } else {
-      //     $('#productModal').modal('hide');
-      //     vm.getProducts();
-      //   }
-      // });
-
       let response;
       if (!vm.isNew) {
         response = await apiAdminUpdateProduct(vm.tempProduct.id, {
@@ -424,17 +396,6 @@ export default {
     },
     async deleteProduct() {
       const vm = this;
-      // const api = `${process.env.VUE_APP_APIPATH}/
-      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      // vm.$http.delete(api).then((response) => {
-      //   if (response.data.success) {
-      //     $('#delProductModal').modal('hide');
-      //     vm.getProducts();
-      //   } else {
-      //     $('#delProductModal').modal('hide');
-      //     vm.getProducts();
-      //   }
-      // });
       const response = await apiAdminDeleteProduct(vm.tempProduct.id);
       if (response.data.success) {
         $('#delProductModal').modal('hide');
@@ -449,25 +410,7 @@ export default {
       const uploadFile = vm.$refs.files.files[0];
       const formData = new FormData();
       formData.append('file-to-upload', uploadFile);
-      // const url = `${process.env.VUE_APP_APIPATH}/
-      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
       vm.status.fileUploading = true;
-      // console.log(vm.status.fileUploading);
-      // vm.$http
-      //   .post(url, formData, {
-      //     headers: {
-      //       'content-Type': 'multipart/form-data',
-      //     },
-      //   })
-      //   .then((response) => {
-      //     vm.status.fileUploading = false;
-      //     if (response.data.success) {
-      //       vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
-      //     } else {
-      //       vm.$bus.$emit('message:push', response.data.message, 'maple');
-      //     }
-      //   });
-
       const response = await apiAdminUploadFile(formData);
       vm.status.fileUploading = false;
       if (response.data.success) {

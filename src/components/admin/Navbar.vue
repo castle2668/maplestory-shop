@@ -92,12 +92,6 @@ export default {
   methods: {
     async signout() {
       const vm = this;
-      // const url = `${process.env.VUE_APP_APIPATH}/logout`;
-      // vm.$http.post(url).then((response) => {
-      //   if (response.data.success) {
-      //     vm.$router.push('/login');
-      //   }
-      // });
       const response = await apiLogout();
       if (response.data.success) {
         vm.$router.push('/login');

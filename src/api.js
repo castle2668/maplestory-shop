@@ -9,7 +9,6 @@ const shopRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}/api/${VUE_APP_CUSTOMPATH}`,
   headers: {
     'Content-Type': 'application/json',
-    // Authorization: myCookie,
   },
 });
 
@@ -17,7 +16,6 @@ const userRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}`,
   headers: {
     'Content-Type': 'application/json',
-    // Authorization: myCookie,
   },
 });
 
@@ -25,7 +23,6 @@ const uploadFileRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}/api/${VUE_APP_CUSTOMPATH}`,
   headers: {
     'Content-Type': 'multipart/form-data',
-    // Authorization: myCookie,
   },
 });
 
@@ -38,6 +35,7 @@ export const apiUserCheck = () => userRequest.post('/api/user/check');
 export const apiGetCart = () => shopRequest.get('/cart');
 export const apiRemoveCart = (id) => shopRequest.delete(`/cart/${id}`);
 export const apiAddCart = (json) => shopRequest.post('/cart', json);
+// 前台 Coupon
 export const apiAddCoupon = (json) => shopRequest.post('/coupon', json);
 // 前台 Product
 export const apiGetAllProducts = () => shopRequest.get('/products/all');

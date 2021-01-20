@@ -186,13 +186,6 @@ export default {
   methods: {
     async getOrder() {
       const vm = this;
-      // const url = `
-      // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${vm.orderId}`;
-      // vm.$store.dispatch('global/updateLoading', true);
-      // vm.$http.get(url).then((response) => {
-      //   vm.order = response.data.order;
-      //   vm.$store.dispatch('global/updateLoading', false);
-      // });
       vm.$store.dispatch('global/updateLoading', true);
       const response = await apiGetOrder(vm.orderId);
       vm.order = response.data.order;
@@ -200,16 +193,6 @@ export default {
     },
     async payOrder() {
       const vm = this;
-      // const url = `
-      // ${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${vm.orderId}`;
-      // vm.$store.dispatch('global/updateLoading', true);
-      // vm.$http.post(url).then((response) => {
-      //   if (response.data.success) {
-      //     vm.getOrder();
-      //     vm.$bus.$emit('cartCreate:push');
-      //   }
-      //   vm.$store.dispatch('global/updateLoading', false);
-      // });
       vm.$store.dispatch('global/updateLoading', true);
       const response = await apiPayOrder(vm.orderId);
       if (response.data.success) {
