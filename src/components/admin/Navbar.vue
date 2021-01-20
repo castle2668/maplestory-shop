@@ -85,17 +85,23 @@
 </template>
 
 <script>
+import { apiLogout } from '@/api';
+
 export default {
   name: 'Navbar',
   methods: {
-    signout() {
+    async signout() {
       const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/logout`;
-      vm.$http.post(url).then((response) => {
-        if (response.data.success) {
-          vm.$router.push('/login');
-        }
-      });
+      // const url = `${process.env.VUE_APP_APIPATH}/logout`;
+      // vm.$http.post(url).then((response) => {
+      //   if (response.data.success) {
+      //     vm.$router.push('/login');
+      //   }
+      // });
+      const response = await apiLogout();
+      if (response.data.success) {
+        vm.$router.push('/login');
+      }
     },
   },
 };

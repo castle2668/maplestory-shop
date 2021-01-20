@@ -19,6 +19,7 @@ import dateFilter from './filters/date';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import { apiUserCheck } from './api';
 
 Vue.config.productionTip = false;
 // 第三方套件
@@ -51,8 +52,7 @@ new Vue({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    const api = `${process.env.VUE_APP_APIPATH}/api/user/check`;
-    axios.post(api).then((response) => {
+    apiUserCheck().then((response) => {
       if (response.data.success) {
         next();
       } else {
