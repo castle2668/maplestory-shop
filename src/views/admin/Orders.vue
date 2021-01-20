@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { apiAdminGetOrder } from '@/api';
 import Pagination from '../../components/shared/Pagination.vue';
 
 export default {
@@ -106,15 +107,22 @@ export default {
     this.getOrders();
   },
   methods: {
-    getOrders(currentPage = 1) {
+    async getOrders(currentPage = 1) {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${currentPage}`;
+      // const api = `${process.env.VUE_APP_APIPATH}
+      // /api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${currentPage}`;
+      // vm.$store.dispatch('global/updateLoading', true);
+      // vm.$http.get(api).then((response) => {
+      //   vm.$store.dispatch('global/updateLoading', false);
+      //   vm.orders = response.data.orders;
+      //   vm.pagination = response.data.pagination;
+      // });
+
       vm.$store.dispatch('global/updateLoading', true);
-      vm.$http.get(api).then((response) => {
-        vm.$store.dispatch('global/updateLoading', false);
-        vm.orders = response.data.orders;
-        vm.pagination = response.data.pagination;
-      });
+      const response = await apiAdminGetOrder(currentPage);
+      vm.$store.dispatch('global/updateLoading', false);
+      vm.orders = response.data.orders;
+      vm.pagination = response.data.pagination;
     },
   },
 };

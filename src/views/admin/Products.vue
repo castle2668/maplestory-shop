@@ -132,16 +132,16 @@
                 <div class="form-group">
                   <label for="customFile">
                     或 上傳圖片
-                    <i
-                      v-if="status.fileUploading"
-                      class="fas fa-spinner fa-spin"
-                    />
+                    <span v-if="status.fileUploading">
+                      <i class="fas fa-spinner fa-spin" />
+                    </span>
                   </label>
                   <input
                     id="customFile"
                     ref="files"
                     type="file"
                     class="form-control"
+                    style="height: auto;"
                     @change="uploadFile"
                   >
                 </div>
@@ -325,6 +325,13 @@
 
 <script>
 import $ from 'jquery';
+import {
+  apiAdminGetProducts,
+  apiAdminUpdateProduct,
+  apiAdminAddProduct,
+  apiAdminDeleteProduct,
+  apiAdminUploadFile,
+} from '@/api';
 import Pagination from '../../components/shared/Pagination.vue';
 
 export default {
@@ -346,15 +353,22 @@ export default {
     this.getProducts();
   },
   methods: {
-    getProducts(page = 1) {
+    async getProducts(page = 1) {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
+      // const api = `${process.env.VUE_APP_APIPATH}/
+      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
+      // vm.$store.dispatch('global/updateLoading', true);
+      // vm.$http.get(api).then((response) => {
+      //   vm.$store.dispatch('global/updateLoading', false);
+      //   vm.products = response.data.products;
+      //   vm.pagination = response.data.pagination;
+      // });
+
       vm.$store.dispatch('global/updateLoading', true);
-      vm.$http.get(api).then((response) => {
-        vm.$store.dispatch('global/updateLoading', false);
-        vm.products = response.data.products;
-        vm.pagination = response.data.pagination;
-      });
+      const response = await apiAdminGetProducts(page);
+      vm.$store.dispatch('global/updateLoading', false);
+      vm.products = response.data.products;
+      vm.pagination = response.data.pagination;
     },
     openModal(isNew, item) {
       const vm = this;
@@ -367,73 +381,110 @@ export default {
       }
       $('#productModal').modal('show');
     },
-    updateProduct() {
-      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
+    async updateProduct() {
+      // let api = `${process.env.VUE_APP_APIPATH}/
+      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
       const vm = this;
 
-      let httpMethod = 'post';
+      // let httpMethod = 'post';
+      // if (!vm.isNew) {
+      //   api = `${process.env.VUE_APP_APIPATH}/
+      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
+      //   httpMethod = 'put';
+      // }
+      // vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
+      //   if (response.data.success) {
+      //     $('#productModal').modal('hide');
+      //     vm.getProducts();
+      //   } else {
+      //     $('#productModal').modal('hide');
+      //     vm.getProducts();
+      //   }
+      // });
+
+      let response;
       if (!vm.isNew) {
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        httpMethod = 'put';
+        response = await apiAdminUpdateProduct(vm.tempProduct.id, {
+          data: vm.tempProduct,
+        });
+      } else {
+        response = await apiAdminAddProduct({ data: vm.tempProduct });
       }
-      vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
-        if (response.data.success) {
-          $('#productModal').modal('hide');
-          vm.getProducts();
-        } else {
-          $('#productModal').modal('hide');
-          vm.getProducts();
-        }
-      });
+      if (response.data.success) {
+        $('#productModal').modal('hide');
+        vm.getProducts();
+      } else {
+        $('#productModal').modal('hide');
+        vm.getProducts();
+      }
     },
     openDelModal(item) {
       this.tempProduct = item;
       $('#delProductModal').modal('show');
     },
-    deleteProduct() {
+    async deleteProduct() {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      vm.$http.delete(api).then((response) => {
-        if (response.data.success) {
-          $('#delProductModal').modal('hide');
-          vm.getProducts();
-        } else {
-          $('#delProductModal').modal('hide');
-          vm.getProducts();
-        }
-      });
+      // const api = `${process.env.VUE_APP_APIPATH}/
+      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
+      // vm.$http.delete(api).then((response) => {
+      //   if (response.data.success) {
+      //     $('#delProductModal').modal('hide');
+      //     vm.getProducts();
+      //   } else {
+      //     $('#delProductModal').modal('hide');
+      //     vm.getProducts();
+      //   }
+      // });
+      const response = await apiAdminDeleteProduct(vm.tempProduct.id);
+      if (response.data.success) {
+        $('#delProductModal').modal('hide');
+        vm.getProducts();
+      } else {
+        $('#delProductModal').modal('hide');
+        vm.getProducts();
+      }
     },
-    uploadFile() {
+    async uploadFile() {
       const vm = this;
       const uploadFile = vm.$refs.files.files[0];
       const formData = new FormData();
       formData.append('file-to-upload', uploadFile);
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
+      // const url = `${process.env.VUE_APP_APIPATH}/
+      // api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
       vm.status.fileUploading = true;
-      vm.$http
-        .post(url, formData, {
-          headers: {
-            'content-Type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          vm.status.fileUploading = false;
-          if (response.data.success) {
-            vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
-          } else {
-            vm.$bus.$emit('message:push', response.data.message, 'maple');
-          }
-        });
+      // console.log(vm.status.fileUploading);
+      // vm.$http
+      //   .post(url, formData, {
+      //     headers: {
+      //       'content-Type': 'multipart/form-data',
+      //     },
+      //   })
+      //   .then((response) => {
+      //     vm.status.fileUploading = false;
+      //     if (response.data.success) {
+      //       vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+      //     } else {
+      //       vm.$bus.$emit('message:push', response.data.message, 'maple');
+      //     }
+      //   });
+
+      const response = await apiAdminUploadFile(formData);
+      vm.status.fileUploading = false;
+      if (response.data.success) {
+        vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+      } else {
+        vm.$bus.$emit('message:push', response.data.message, 'maple');
+      }
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.loading-image {
-  background-image: url(../../assets/images/GIFs/KingSlime.gif);
-  background-size: cover;
-  width: 219px;
-  height: 230px;
-}
+  .loading-image {
+    background-image: url(../../assets/images/GIFs/KingSlime.gif);
+    background-size: cover;
+    width: 219px;
+    height: 230px;
+  }
 </style>

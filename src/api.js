@@ -49,9 +49,9 @@ export const apiGetOrder = (id) => shopRequest.get(`/order/${id}`);
 export const apiPayOrder = (id) => shopRequest.post(`/pay/${id}`);
 
 // 後台 Product
-export const apiAdminGetProducts = (page) => shopRequest.get(`/admin/products?page=${page}`, page);
+export const apiAdminGetProducts = (page) => shopRequest.get(`/admin/products?page=${page}`);
 export const apiAdminAddProduct = (json) => shopRequest.post('/admin/product', json);
-export const apiAdminUpdateProduct = (id) => shopRequest.put(`/admin/product/${id}`);
+export const apiAdminUpdateProduct = (id, json) => shopRequest.put(`/admin/product/${id}`, json);
 export const apiAdminDeleteProduct = (id) => shopRequest.delete(`/admin/product/${id}`);
 // 後台 Coupon
 export const apiAdminGetCoupon = (page) => shopRequest.get(`/admin/coupons?page=${page}`);
@@ -61,4 +61,4 @@ export const apiAdminDeleteCoupon = (id) => shopRequest.delete(`/admin/coupon/${
 // 後台 Order
 export const apiAdminGetOrder = (page) => shopRequest.get(`/admin/orders?page=${page}`);
 // 後台 Upload
-export const apiAdminUploadFile = (formData) => uploadFileRequest.upload('/admin/upload', formData);
+export const apiAdminUploadFile = (formData) => uploadFileRequest.post('/admin/upload', formData);
