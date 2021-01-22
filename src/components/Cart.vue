@@ -1,7 +1,7 @@
 <template>
   <div>
     <a
-      type="button"
+      role="button"
       class="btn btn-cart"
       data-toggle="modal"
       data-target="#cartModal"
@@ -289,10 +289,13 @@ export default {
   z-index: 1100;
 }
 a.btn-cart {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   position: fixed;
   bottom: 20px;
   right: 10px;
   z-index: 999;
+  background: transparent;
   .badge-cart {
     background: #c1170c;
     border-radius: 50%;
