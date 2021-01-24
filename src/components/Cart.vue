@@ -51,7 +51,7 @@
             >
               <div class="col-12">
                 <div class="table-responsive mb-2">
-                  <table class="table mb-0">
+                  <table class="cart-table mb-0">
                     <thead class="thead-light">
                       <th />
                       <th class="text-nowrap">
@@ -183,14 +183,15 @@
                 <img
                   src="../assets/images/penguine.png"
                   height="150px"
-                  alt=""
+                  alt
                 >
               </div>
               <p
                 class="h3 align-middle mb-0"
                 style="line-height: 1.4"
               >
-                購物車空空的哦！<br>去看看心儀的商品吧
+                購物車空空的哦！
+                <br>去看看心儀的商品吧
               </p>
             </div>
           </div>
@@ -217,9 +218,7 @@
             <a
               class="btn btn-block btn-maple text-white"
               @click.prevent="goShopping"
-            >
-              前往購物商城
-            </a>
+            >前往購物商城</a>
           </div>
         </div>
       </div>
@@ -281,45 +280,38 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.message-alert {
-  position: fixed;
-  max-width: 50%;
-  top: 56px;
-  right: 20px;
-  z-index: 1100;
-}
-a.btn-cart {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  position: fixed;
-  bottom: 20px;
-  right: 10px;
-  z-index: 999;
-  background: transparent;
-  .badge-cart {
-    background: #c1170c;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    top: 10px;
-    right: 30px;
-    color: #fff;
-    text-align: center;
-  }
-}
-table.table{
-  .responsive-td{
-    @media(min-width: 576px){
-      width: 200px;
-    }
-    .select-text-center {
-      width: 80px;
-      text-align: justify;
-      text-align-last: center;
-      border-radius: 0.2rem;
-      flex: none;
+  a.btn-cart {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    z-index: 999;
+    background: transparent;
+    .badge-cart {
+      background: #c1170c;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 10px;
+      right: 30px;
+      color: #fff;
+      text-align: center;
     }
   }
-}
+  table.cart-table {
+    .responsive-td {
+      @media (min-width: 576px) {
+        width: 200px;
+      }
+      .select-text-center {
+        width: 80px;
+        text-align: justify;
+        text-align-last: center;
+        border-radius: 0.2rem;
+        flex: none;
+      }
+    }
+  }
 </style>
