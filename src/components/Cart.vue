@@ -51,7 +51,7 @@
             >
               <div class="col-12">
                 <div class="table-responsive mb-2">
-                  <table class="cart-table mb-0">
+                  <table class="table cart-table mb-0">
                     <thead class="thead-light">
                       <th />
                       <th class="text-nowrap">
