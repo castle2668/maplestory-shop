@@ -36,6 +36,7 @@
                   class="nav-link p-3 py-lg-2"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
+                  exact
                 >
                   <i class="fas fa-home" />
                   首頁
