@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const { VUE_APP_APIPATH, VUE_APP_CUSTOMPATH } = process.env;
 
-const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-axios.defaults.headers.common.Authorization = myCookie;
+const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1'); // 讀出 cookie
+axios.defaults.headers.common.Authorization = myCookie; // 請求時預設加入 Authorization 欄位
 
 const shopRequest = axios.create({
   baseURL: `${VUE_APP_APIPATH}/api/${VUE_APP_CUSTOMPATH}`,

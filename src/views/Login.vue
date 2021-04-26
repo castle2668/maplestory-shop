@@ -1,8 +1,6 @@
 <template>
   <div>
     <section class="bg-login">
-      <Alert />
-      <Header />
       <form
         class="form-signin"
         @submit.prevent="signin"
@@ -49,15 +47,9 @@
 
 <script>
 import { apiSignin } from '@/api';
-import Header from '../components/Header.vue';
-import Alert from '../components/shared/AlertMessage.vue';
 
 export default {
   name: 'Login',
-  components: {
-    Header,
-    Alert,
-  },
   data() {
     return {
       user: {
@@ -73,13 +65,20 @@ export default {
       if (response.data.success) {
         console.log(response);
         const { token, expired } = response.data;
-        document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
+        document.cookie = `hexToken=${token}; expires=${new Date(expired)}`; // 寫入 cookie
+        // 存完 cookie 才轉址
         if (vm.$route.path !== '/admin/products') {
           vm.$router.push('/admin/products');
         }
-        vm.$store.dispatch('global/updateMessage', { message: response.data.message, status: 'success' });
+        vm.$store.dispatch('global/updateMessage', {
+          message: response.data.message,
+          status: 'success',
+        });
       } else {
-        vm.$store.dispatch('global/updateMessage', { message: response.data.message, status: 'maple' });
+        vm.$store.dispatch('global/updateMessage', {
+          message: response.data.message,
+          status: 'maple',
+        });
       }
     },
   },
