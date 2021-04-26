@@ -5,8 +5,8 @@
     <main>
       <router-view />
     </main>
-    <Cart />
-    <Footer />
+    <Cart v-if="showCart" />
+    <Footer v-if="showFooter" />
   </div>
 </template>
 
@@ -23,6 +23,22 @@ export default {
     Footer,
     Cart,
     Alert,
+  },
+  computed: {
+    showCart() {
+      if (
+        this.$route.name === 'Index'
+        || this.$route.name === 'Category'
+        || this.$route.name === 'Detail'
+      ) {
+        return true;
+      }
+      return false;
+    },
+    showFooter() {
+      if (this.$route.name === 'Login') return false;
+      return true;
+    },
   },
   created() {
     $(window).click(() => {
