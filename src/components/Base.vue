@@ -33,9 +33,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-main {
-  margin-top: 69px;
-}
-</style>

@@ -369,11 +369,7 @@ export default {
 };
 </script>
 
-<style scope lang="scss">
-main {
-  margin-top: 69px;
-}
-
+<style scoped lang="scss">
 .loading-image {
   background-image: url(../assets/images/GIFs/KingSlime.gif);
   background-size: cover;

@@ -11,6 +11,8 @@ import VueI18n from 'vue-i18n';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import swiper, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
+// 引入 SCSS 檔案
+import './assets/scss/all.scss';
 // Vue
 import Vuex from 'vuex';
 import currencyFilter from './filters/currency';

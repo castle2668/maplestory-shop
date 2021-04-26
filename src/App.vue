@@ -21,8 +21,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import './assets/scss/all';
-
 .loading-image {
   background-image: url(./assets/images/GIFs/KingSlime.gif);
   background-size: cover;

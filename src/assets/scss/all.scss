@@ -1,3 +1,7 @@
-@import '~bootstrap/scss/functions';
-@import './helpers/variables';
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables";
+@import "~bootstrap/scss/bootstrap";
+
+main {
+  margin-top: 69px;
+}

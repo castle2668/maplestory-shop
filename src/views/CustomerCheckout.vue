@@ -206,10 +206,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-main {
-  margin-top: 69px;
-}
-
 .conform-cart {
   h2 {
     display: inline-block;
