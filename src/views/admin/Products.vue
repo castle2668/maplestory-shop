@@ -422,12 +422,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-  .loading-image {
-    background-image: url(../../assets/images/GIFs/KingSlime.gif);
-    background-size: cover;
-    width: 219px;
-    height: 230px;
-  }
-</style>

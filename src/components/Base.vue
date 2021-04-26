@@ -18,6 +18,7 @@ import Cart from './Cart.vue';
 import Alert from './shared/AlertMessage.vue';
 
 export default {
+  name: 'Base',
   components: {
     Header,
     Footer,
