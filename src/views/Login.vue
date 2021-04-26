@@ -63,7 +63,6 @@ export default {
       const vm = this;
       const response = await apiSignin(vm.user);
       if (response.data.success) {
-        console.log(response);
         const { token, expired } = response.data;
         document.cookie = `hexToken=${token}; expires=${new Date(expired)}`; // 寫入 cookie
         // 存完 cookie 才轉址
