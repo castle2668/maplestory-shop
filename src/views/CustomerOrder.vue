@@ -175,7 +175,7 @@
               id="useremail"
               v-model="form.user.email"
               v-validate="'required|email'"
-              type="email"
+              type="text"
               class="form-control"
               name="email"
               placeholder="請輸入 Email"

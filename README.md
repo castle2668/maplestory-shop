@@ -44,10 +44,10 @@
 
 ## :pushpin: Plugins | 使用套件
 
-- [vue-loading-overlay](https://www.npmjs.com/package/vue-loading-overlay)
+- [vue-loading-overlay](https://github.com/ankurk91/vue-loading-overlay)
 - [swiper](https://swiperjs.com/)
-- [vue-awesome-swiper](https://3.swiper.com.cn/)
-- [vue-i18n](https://github.com/kazupon/vue-i18n#readme)
+- [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
+- [Vue I18n v8.x](https://github.com/kazupon/vue-i18n)
 - [vee-validate](https://logaretm.github.io/vee-validate/)
 
 ## :mag: Introduction | 前端畫面介紹

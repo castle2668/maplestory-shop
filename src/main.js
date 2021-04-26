@@ -23,10 +23,14 @@ import store from './store';
 import { apiUserCheck } from './api';
 
 Vue.config.productionTip = false;
+
 // 第三方套件
+// axios + vue-axios
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
+// vue-loading-overlay
 Vue.component('Loading', Loading);
+// vee-validate + vue-i18n
 Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'zhTW',
@@ -38,8 +42,10 @@ Vue.use(VeeValidate, {
     zhTW,
   },
 });
+// vue-awesome-swiper + swiper
 Vue.use(VueAwesomeSwiper);
 swiper.use([Navigation, Pagination, Autoplay]);
+
 // Vue
 Vue.filter('currency', currencyFilter);
 Vue.filter('date', dateFilter);
@@ -52,20 +58,18 @@ new Vue({
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {
-  // 檢查欲前往的路由是否需要權限
+  // 是否需要驗證
   if (to.meta.requiresAuth) {
-    // 需要檢查
     apiUserCheck().then((response) => {
-      // 檢查沒過，而且不是要前往 login 頁面，就跳到 Login
+      // 驗證失敗而且不是去 login 就前往 Login
       if (to.name !== 'Login' && !response.data.success) {
         next({ name: 'Login' });
       } else {
-        // 檢查通過，或者是去 Login 頁面，就直接 next()
+        // 驗證成功或是要去 Login 就放行
         next();
       }
     });
   } else {
-    // 不需要檢查
     next();
   }
 });
