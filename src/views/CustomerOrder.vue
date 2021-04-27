@@ -162,124 +162,139 @@
         </h2>
       </div>
       <div class="row justify-content-center">
-        <form
+        <!-- validation-observer 驗證整體表單 -->
+        <ValidationObserver
+          v-slot="{ invalid }"
           class="col-lg-10"
-          @submit.prevent="createOrder"
         >
-          <div class="form-group">
-            <label for="useremail">
-              <i class="fas fa-envelope" />
-              Email (*)
-            </label>
-            <input
-              id="useremail"
-              v-model="form.user.email"
-              v-validate="'required|email'"
-              type="text"
-              class="form-control"
-              name="email"
-              placeholder="請輸入 Email"
-              :class="{ 'is-invalid': errors.has('email') }"
-              :disabled="isDisabled"
+          <!-- 表單送出改為使用 form submit 的方法 -->
+          <form
+            @submit.prevent="createOrder"
+          >
+            <ValidationProvider
+              v-slot="{ errors, classes }"
+              rules="required|email"
             >
-            <span
-              v-if="errors.has('email')"
-              class="text-danger"
-            >
-              {{ errors.first("email") }}
-            </span>
-          </div>
+              <div class="form-group">
+                <!-- 輸入框 -->
+                <label for="userEmail">
+                  <i class="fas fa-envelope" />
+                  Email (*)
+                </label>
+                <input
+                  id="userEmail"
+                  v-model="form.user.email"
+                  name="E-mail"
+                  type="email"
+                  class="form-control"
+                  placeholder="請輸入 Email"
+                  :class="classes"
+                  :disabled="isDisabled"
+                >
+                <!-- 錯誤訊息 -->
+                <span class="invalid-feedback">{{ errors[0] }}</span>
+              </div>
+            </ValidationProvider>
 
-          <div class="form-group">
-            <label for="username">
-              <i class="fas fa-user" />
-              收件人姓名 (*)
-            </label>
-            <input
-              id="username"
-              v-model="form.user.name"
-              v-validate="'required'"
-              type="text"
-              class="form-control"
-              name="name"
-              placeholder="輸入姓名"
-              :class="{ 'is-invalid': errors.has('name') }"
-              :disabled="isDisabled"
+            <ValidationProvider
+              v-slot="{ errors, classes }"
+              rules="required"
             >
-            <span
-              v-if="errors.has('name')"
-              class="text-danger"
-            >必須輸入姓名</span>
-          </div>
+              <div class="form-group">
+                <label for="userName">
+                  <i class="fas fa-user" />
+                  收件人姓名 (*)
+                </label>
+                <input
+                  id="userName"
+                  v-model="form.user.name"
+                  type="text"
+                  class="form-control"
+                  name="Name"
+                  placeholder="輸入姓名"
+                  :class="classes"
+                  :disabled="isDisabled"
+                >
+                <span class="invalid-feedback">{{ errors[0] }}</span>
+              </div>
+            </ValidationProvider>
 
-          <div class="form-group">
-            <label for="usertel">
-              <i class="fas fa-phone" />
-              收件人電話 (*)
-            </label>
-            <input
-              id="usertel"
-              v-model="form.user.tel"
-              v-validate="'required'"
-              type="tel"
-              class="form-control"
-              placeholder="請輸入電話"
-              name="userTel"
-              :class="{ 'is-invalid': errors.has('userTel') }"
-              :disabled="isDisabled"
+            <ValidationProvider
+              v-slot="{ errors, classes }"
+              class="form-group"
+              rules="required|numeric"
             >
-            <span
-              v-if="errors.has('userTel')"
-              class="text-danger"
-            >電話欄位不得留空</span>
-          </div>
+              <div class="form-group">
+                <label for="userTel">
+                  <i class="fas fa-phone" />
+                  收件人電話 (*)
+                </label>
+                <input
+                  id="userTel"
+                  v-model="form.user.tel"
+                  type="tel"
+                  class="form-control"
+                  placeholder="請輸入電話"
+                  name="Telphone"
+                  :class="classes"
+                  :disabled="isDisabled"
+                >
+                <span class="invalid-feedback">{{ errors[0] }}</span>
+              </div>
+            </ValidationProvider>
 
-          <div class="form-group">
-            <label for="useraddress">
-              <i class="fas fa-map-marker-alt" />
-              收件人地址 (*)
-            </label>
-            <input
-              id="useraddress"
-              v-model="form.user.address"
-              v-validate="'required'"
-              type="text"
-              class="form-control"
-              name="address"
-              placeholder="請輸入地址"
-              :class="{ 'is-invalid': errors.has('address') }"
-              :disabled="isDisabled"
+            <ValidationProvider
+              v-slot="{ errors, classes }"
+              class="form-group"
+              rules="required"
             >
-            <span
-              v-if="errors.has('address')"
-              class="text-danger"
-            >地址欄位不得留空</span>
-          </div>
+              <div class="form-group">
+                <label for="userAddress">
+                  <i class="fas fa-map-marker-alt" />
+                  收件人地址 (*)
+                </label>
+                <input
+                  id="userAddress"
+                  v-model="form.user.address"
+                  type="text"
+                  class="form-control"
+                  name="Address"
+                  placeholder="請輸入地址"
+                  :class="classes"
+                  :disabled="isDisabled"
+                >
+                <span class="invalid-feedback">{{ errors[0] }}</span>
+              </div>
+            </ValidationProvider>
 
-          <div class="form-group">
-            <label for="comment">
-              <i class="fas fa-comment-dots" />
-              留言
-            </label>
-            <textarea
-              id="comment"
-              v-model="form.message"
-              name
-              class="form-control"
-              cols="30"
-              rows="10"
-              :disabled="isDisabled"
-            />
-          </div>
-          <div class="text-right">
-            <button
-              class="btn btn-maple btn-lg"
-              :disabled="isDisabled"
-            >
-              送出訂單
-            </button>
-          </div>
-        </form>
+            <div class="form-group">
+              <label for="comment">
+                <i class="fas fa-comment-dots" />
+                留言
+              </label>
+              <textarea
+                id="comment"
+                v-model="form.message"
+                name
+                class="form-control"
+                cols="30"
+                rows="10"
+                :disabled="isDisabled"
+              />
+            </div>
+
+            <!-- 送出表單使用 @submit 的方法，如果驗證未通過則 disabled 該按鈕 -->
+            <div class="text-right">
+              <button
+                type="submit"
+                class="btn btn-maple btn-lg"
+                :disabled="isDisabled || invalid"
+              >
+                送出訂單
+              </button>
+            </div>
+          </form>
+        </ValidationObserver>
       </div>
     </div>
   </div>
@@ -330,17 +345,15 @@ export default {
     addCouponCode() {
       this.$store.dispatch('global/addCouponCode', this.coupon_code);
     },
+    // Validate Before Submit
     async createOrder() {
       const vm = this;
       const order = vm.form;
-      const result = await vm.$validator.validate();
-      if (result) {
-        const response = await apiCreateOrder({ data: order });
-        if (response.data.success) {
-          vm.$router.push(`/customerCheckout/${response.data.orderId}`);
-        }
-        vm.$store.dispatch('global/updateLoading', false);
+      const response = await apiCreateOrder({ data: order });
+      if (response.data.success) {
+        vm.$router.push(`/customerCheckout/${response.data.orderId}`);
       }
+      vm.$store.dispatch('global/updateLoading', false);
     },
     addQty(cid, pid, qty) {
       const newQty = Number(qty) + 1;

@@ -1,18 +1,28 @@
 import Vue from 'vue';
+
 // 第三方套件
+// axios + vue-axios
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+// vue-loading-overlay
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+// bootstrap
 import 'bootstrap';
-import VeeValidate from 'vee-validate';
-import zhTW from 'vee-validate/dist/locale/zh_TW';
-import VueI18n from 'vue-i18n';
+// vee-validate + vue-i18n
+import {
+  ValidationObserver, ValidationProvider, extend, localize, configure,
+} from 'vee-validate';
+import TW from 'vee-validate/dist/locale/zh_TW.json';
+import * as rules from 'vee-validate/dist/rules';
+// vue-awesome-swiper + swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 import swiper, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
+
 // 引入 SCSS 檔案
 import './assets/scss/all.scss';
+
 // Vue
 import Vuex from 'vuex';
 import currencyFilter from './filters/currency';
@@ -31,15 +41,16 @@ axios.defaults.withCredentials = true;
 // vue-loading-overlay
 Vue.component('Loading', Loading);
 // vee-validate + vue-i18n
-Vue.use(VueI18n);
-const i18n = new VueI18n({
-  locale: 'zhTW',
+Object.keys(rules).forEach((rule) => {
+  extend(rule, rules[rule]);
 });
-Vue.use(VeeValidate, {
-  events: 'input|blur',
-  i18n,
-  dictionary: {
-    zhTW,
+localize('zh_TW', TW);
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
+configure({
+  classes: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
   },
 });
 // vue-awesome-swiper + swiper
