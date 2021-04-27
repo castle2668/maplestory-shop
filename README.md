@@ -49,7 +49,7 @@
 - [swiper](https://swiperjs.com/)
 - [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
 - [Vue I18n v8.x](https://github.com/kazupon/vue-i18n)
-- [vee-validate](https://logaretm.github.io/vee-validate/)
+- [vee-validate v3](https://logaretm.github.io/vee-validate/)
 
 ## :mag: Introduction | 前端畫面介紹
 
