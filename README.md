@@ -30,7 +30,8 @@
 - [2021/01/17]：檢查更新專案內的套件
 - [2021/01/18]：使用 Axios instance 的寫法串接 API，並重構 Vuex 模組化
 - [2021/04/25]：設置 ESLint 搭配 Vue.js Style Guide
-- [2021/04/26]：修改專案的 SCSS 設定
+- [2021/04/26]：修改專案 SCSS 設定
+- [2021/04/27]：VeeValidate V2 to V3 Upgrade
 
 ## :pencil2: Skills | 使用技術
 
