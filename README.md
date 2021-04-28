@@ -109,7 +109,7 @@
 - 網站名稱：MapleStoryShop
 - 網站描述：楓之谷電子商務網站
 - 網站網址：<https://sealman234.github.io/MapleStoryShopV4/>
-- 網站狀態：火熱上線中
+- 網站狀態：持續更新中…
 
 ## :hamburger: About Author | 關於作者
 
