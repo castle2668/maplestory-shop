@@ -17,8 +17,7 @@ import TW from 'vee-validate/dist/locale/zh_TW.json';
 import * as rules from 'vee-validate/dist/rules';
 // vue-awesome-swiper + swiper
 import VueAwesomeSwiper from 'vue-awesome-swiper';
-import swiper, { Navigation, Pagination, Autoplay } from 'swiper';
-import 'swiper/swiper-bundle.css';
+import 'swiper/css/swiper.css';
 
 // 引入 SCSS 檔案
 import './assets/scss/all.scss';
@@ -55,7 +54,6 @@ configure({
 });
 // vue-awesome-swiper + swiper
 Vue.use(VueAwesomeSwiper);
-swiper.use([Navigation, Pagination, Autoplay]);
 
 // Vue
 Vue.filter('currency', currencyFilter);
