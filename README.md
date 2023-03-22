@@ -117,8 +117,8 @@
 - 描述：你不需要很厲害才能開始，但你需要開始才會很厲害
 - 狀態：前端菜鳥一枚
 - 專業：前端開發與資訊管理
-- 網站：[海豹人的第一個家](https://sealman234.github.io/)
-- 信箱：[castle2668@gmail.com](mailto:castle2668@gmail.com)
+- 網站：[海豹人的第一個家](https://www.sealman.dev/)
+- 信箱：[castle2668@gmail.com](mailto:sealman.dev@gmail.com)
 
 ## :paperclip: Statement | 聲明
 
