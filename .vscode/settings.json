@@ -1,13 +1,10 @@
 {
   // 使用 ESLint 檢查 JavaScript
   "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+    "source.fixAll.eslint": true
   },
   // ESLint 預設只有 JavaScript, 新增 Vue
-  "eslint.validate": [
-      "javascript",
-      "vue"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
   // 關閉 Vetur 在 .vue 檔案 <template> 區塊的驗證
-  "vetur.validation.template": false,
+  "vetur.validation.template": false
 }

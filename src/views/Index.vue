@@ -309,7 +309,11 @@ export default {
         slidesPerView: 4,
         spaceBetween: 30,
         loop: true,
-        autoplay: true,
+        autoplay: {
+          delay: 3000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
+        },
         pagination: {
           el: '.swiper-pagination.swp1',
           clickable: true,
@@ -343,6 +347,8 @@ export default {
         loop: true,
         autoplay: {
           delay: 5000,
+          stopOnLastSlide: false,
+          disableOnInteraction: false,
         },
         breakpoints: {
           320: {

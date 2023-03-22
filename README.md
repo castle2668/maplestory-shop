@@ -109,7 +109,7 @@
 - 網站名稱：MapleStoryShop
 - 網站描述：楓之谷電子商務網站
 - 網站網址：<https://sealman234.github.io/MapleStoryShopV4/>
-- 網站狀態：持續更新中
+- 網站狀態：維護階段
 
 ## :hamburger: About Author | 關於作者
 
@@ -117,8 +117,8 @@
 - 描述：你不需要很厲害才能開始，但你需要開始才會很厲害
 - 狀態：前端菜鳥一枚
 - 專業：前端開發與資訊管理
-- 網站：[海豹人的第一個家](https://sealman234.github.io/)
-- 信箱：[castle2668@gmail.com](mailto:castle2668@gmail.com)
+- 網站：[海豹人的第一個家](https://www.sealman.dev/)
+- 信箱：[castle2668@gmail.com](mailto:sealman.dev@gmail.com)
 
 ## :paperclip: Statement | 聲明
 
