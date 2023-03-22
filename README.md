@@ -33,6 +33,10 @@
 - [2021/04/26]：修改專案 SCSS 設定
 - [2021/04/27]：VeeValidate V2 to V3 Upgrade
 
+### 2023
+
+- [2023/03/22]：Fix Security Vulnerabilities
+
 ## :pencil2: Skills | 使用技術
 
 - Vue 2 (Vue CLI + Vue Router + Vuex)
