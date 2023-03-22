@@ -15,7 +15,7 @@ Vue.use(Vuex);
  * with the Store instance.
  */
 
-export default function () {
+export default function func() {
   const Store = new Vuex.Store({
     modules: {
       global,
