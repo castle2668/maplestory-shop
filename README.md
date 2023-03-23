@@ -1,6 +1,8 @@
 # 楓之谷商城 (MapleStory Shop)
 
-> 歡迎來到楓之谷商城，這是我的 Vue.js 電商網站作品，裡面充滿著我對 Vue.js 與 MapleStory 的熱愛 🍁
+[![HitCount](https://hits.dwyl.com/sealman234/maplestory-shop.svg?style=flat-square)](http://hits.dwyl.com/sealman234/maplestory-shop)
+
+歡迎來到楓之谷商城，這是我的 Vue.js 電商網站作品，裡面充滿著我對 Vue.js 與 MapleStory 的熱愛 🍁
 
 ## :pencil: Change Log | 更新日誌
 
