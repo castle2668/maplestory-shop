@@ -1,7 +1,7 @@
 {
   "name": "maplestoryshop",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.0.3",
+  "author": "Sealman <sealman.dev@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

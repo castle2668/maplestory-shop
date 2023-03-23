@@ -36,10 +36,11 @@
 ### 2023
 
 - [2023/03/22]：Fix Security Vulnerabilities
+- [2023/03/23]：Downgrade to Node 14
 
 ## :pencil2: Skills | 使用技術
 
-- Vue 2 (Vue CLI + Vue Router + Vuex)
+- Vue 2.7.14 (Vue CLI + Vue Router + Vuex)
 - JavaScript (ES6)
 - ESLint (Airbnb) + Vue.js Style Guide (Recommended)
 - Axios
@@ -50,7 +51,7 @@
 ## :pushpin: Plugins | 使用套件
 
 - [vue-loading-overlay](https://github.com/ankurk91/vue-loading-overlay)
-- [swiper](https://swiperjs.com/)
+- [swiper v6](https://swiperjs.com/)
 - [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
 - [Vue I18n v8.x](https://github.com/kazupon/vue-i18n)
 - [vee-validate v3](https://logaretm.github.io/vee-validate/)
@@ -122,7 +123,7 @@
 - 狀態：前端菜鳥一枚
 - 專業：前端開發與資訊管理
 - 網站：[海豹人的第一個家](https://www.sealman.dev/)
-- 信箱：[castle2668@gmail.com](mailto:sealman.dev@gmail.com)
+- 信箱：[sealman.dev@gmail.com](mailto:sealman.dev@gmail.com)
 
 ## :paperclip: Statement | 聲明
 
