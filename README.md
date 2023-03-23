@@ -1,4 +1,4 @@
-# 楓之谷商城 (MapleStoryShop)
+# 楓之谷商城 (MapleStory Shop)
 
 > 歡迎來到楓之谷商城，這是我的 Vue.js 電商網站作品，裡面充滿著我對 Vue.js 與 MapleStory 的熱愛 🍁
 
@@ -111,9 +111,9 @@
 
 ## :maple_leaf: About Shop | 關於楓之谷電商
 
-- 網站名稱：MapleStoryShop
+- 網站名稱：MapleStory Shop
 - 網站描述：楓之谷電子商務網站
-- 網站網址：<https://sealman234.github.io/MapleStoryShopV4/>
+- 網站網址：<https://sealman234.github.io/maplestory-shop/>
 - 網站狀態：維護階段
 
 ## :hamburger: About Author | 關於作者
