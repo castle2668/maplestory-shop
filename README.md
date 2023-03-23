@@ -1,6 +1,5 @@
 # 楓之谷商城 (MapleStory Shop)
 
-[![HitCount](https://hits.dwyl.com/sealman234/maplestory-shop.svg?style=flat-square)](http://hits.dwyl.com/sealman234/maplestory-shop)
 [![pages-build-deployment](https://github.com/sealman234/maplestory-shop/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/sealman234/maplestory-shop/actions/workflows/pages/pages-build-deployment)
 [![CodeQL](https://github.com/sealman234/maplestory-shop/actions/workflows/github-code-scanning/codeql/badge.svg?branch=master)](https://github.com/sealman234/maplestory-shop/actions/workflows/github-code-scanning/codeql)
 
@@ -44,6 +43,19 @@
 
 ## :pencil2: Skills | 使用技術
 
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
+![Airbnb](https://img.shields.io/badge/Airbnb-%23ff5a5f.svg?style=for-the-badge&logo=Airbnb&logoColor=white)
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/github%20pages-121013?style=for-the-badge&logo=github&logoColor=white)
+![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
+![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
+  
 - Vue 2.7.14 (Vue CLI + Vue Router + Vuex)
 - JavaScript (ES6)
 - ESLint (Airbnb) + Vue.js Style Guide (Recommended)
