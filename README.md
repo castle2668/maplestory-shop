@@ -1,6 +1,8 @@
 # 楓之谷商城 (MapleStory Shop)
 
 [![HitCount](https://hits.dwyl.com/sealman234/maplestory-shop.svg?style=flat-square)](http://hits.dwyl.com/sealman234/maplestory-shop)
+[![pages-build-deployment](https://github.com/sealman234/maplestory-shop/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/sealman234/maplestory-shop/actions/workflows/pages/pages-build-deployment)
+[![CodeQL](https://github.com/sealman234/maplestory-shop/actions/workflows/github-code-scanning/codeql/badge.svg?branch=master)](https://github.com/sealman234/maplestory-shop/actions/workflows/github-code-scanning/codeql)
 
 歡迎來到楓之谷商城，這是我的 Vue.js 電商網站作品，裡面充滿著我對 Vue.js 與 MapleStory 的熱愛 🍁
 
