@@ -2,6 +2,7 @@
 
 [![pages-build-deployment](https://github.com/sealman234/maplestory-shop/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/sealman234/maplestory-shop/actions/workflows/pages/pages-build-deployment)
 [![CodeQL](https://github.com/sealman234/maplestory-shop/actions/workflows/github-code-scanning/codeql/badge.svg?branch=master)](https://github.com/sealman234/maplestory-shop/actions/workflows/github-code-scanning/codeql)
+[![Known Vulnerabilities](https://snyk.io/test/github/sealman234/maplestory-shop/badge.svg)](https://snyk.io/test/github/sealman234/maplestory-shop)
 
 歡迎來到楓之谷商城，這是我的 Vue.js 電商網站作品，裡面充滿著我對 Vue.js 與 MapleStory 的熱愛 🍁
 
