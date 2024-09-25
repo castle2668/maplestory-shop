@@ -70,7 +70,7 @@
                 <span />
                 <a
                   class="nav-link p-3 py-lg-2"
-                  href="https://github.com/Sealman234"
+                  href="https://github.com/castle2668"
                   target="_blank"
                 >
                   <i class="fab fa-github" />
