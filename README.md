@@ -57,6 +57,7 @@
 ![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
 ![Dependabot](https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white)
   
+- Node.js 18
 - Vue 2 (Vue CLI + Vue Router + Vuex)
 - JavaScript (ES6)
 - ESLint (Airbnb) + Vue.js Style Guide (Recommended)
