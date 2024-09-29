@@ -1,21 +1,21 @@
 {
   "name": "maplestory-shop",
   "version": "1.0.3",
-  "author": "Sealman <sealman.dev@gmail.com>",
+  "author": "Sean Huang<castle2668@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.28.1",
+    "axios": "^0.27.2",
     "bootstrap": "^4.6.2",
-    "core-js": "^3.38.1",
-    "jquery": "^3.7.1",
+    "core-js": "^3.29.1",
+    "jquery": "^3.7.0",
     "popper.js": "^1.16.1",
     "swiper": "^6.5.1",
     "vee-validate": "^3.4.15",
-    "vue": "^2.7.16",
+    "vue": "^2.7.14",
     "vue-awesome-swiper": "^4.1.1",
     "vue-axios": "^3.5.2",
     "vue-i18n": "^8.24.3",
@@ -34,7 +34,7 @@
     "eslint": "^7.5.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^9.9.0",
-    "node-sass": "6.0.1",
+    "node-sass": "^8.0.0",
     "sass-loader": "^10.2.1",
     "vue-template-compiler": "^2.6.11"
   }
